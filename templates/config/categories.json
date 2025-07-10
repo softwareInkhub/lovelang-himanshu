@@ -1,0 +1,57 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "name": "Premium Collection",
+      "slug": "premium",
+      "description": "Our flagship premium products",
+      "image": "/assets/categories/premium.jpg",
+      "color": "#ea580c",
+      "textColor": "text-orange-600",
+      "buttonColor": "bg-orange-600 hover:bg-orange-700 text-white"
+    },
+    {
+      "id": 2,
+      "name": "Essentials",
+      "slug": "essentials",
+      "description": "Daily essentials you can't live without",
+      "image": "/assets/categories/essentials.jpg",
+      "color": "#dc2626",
+      "textColor": "text-red-600",
+      "buttonColor": "bg-red-600 hover:bg-red-700 text-white"
+    },
+    {
+      "id": 3,
+      "name": "Special Edition",
+      "slug": "special",
+      "description": "Limited time special products",
+      "image": "/assets/categories/special.jpg",
+      "color": "#059669",
+      "textColor": "text-emerald-600",
+      "buttonColor": "bg-emerald-600 hover:bg-emerald-700 text-white"
+    }
+  ],
+  "concerns": [
+    {
+      "id": 1,
+      "name": "Daily Use",
+      "slug": "daily",
+      "description": "Perfect for everyday needs",
+      "theme": "orange"
+    },
+    {
+      "id": 2,
+      "name": "Professional",
+      "slug": "professional",
+      "description": "Professional-grade solutions",
+      "theme": "red"
+    },
+    {
+      "id": 3,
+      "name": "Premium Care",
+      "slug": "premium-care",
+      "description": "Advanced premium care",
+      "theme": "green"
+    }
+  ]
+}

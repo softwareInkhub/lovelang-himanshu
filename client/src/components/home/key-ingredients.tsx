@@ -44,14 +44,14 @@ export default function KeyIngredients() {
           </p>
         </motion.div>
         
-        <div className="grid md:grid-cols-3 gap-12">
+        <div className="md:grid md:grid-cols-3 md:gap-12 flex overflow-x-auto gap-8 pb-4 md:pb-0 scrollbar-hide">
           {ingredients.map((ingredient, index) => (
             <motion.div
               key={ingredient.name}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: index * 0.2 }}
-              className="text-center group"
+              className="text-center group min-w-[250px] md:min-w-0"
             >
               <motion.div
                 whileHover={{ scale: 1.1 }}

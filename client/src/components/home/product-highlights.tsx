@@ -50,7 +50,7 @@ export default function ProductHighlights() {
           </p>
         </motion.div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="lg:grid lg:grid-cols-4 lg:gap-8 md:grid md:grid-cols-2 md:gap-6 flex overflow-x-auto gap-6 pb-4 lg:pb-0 scrollbar-hide">
           {highlightedProducts.map((product, index) => (
             <motion.div
               key={product.title}
@@ -60,7 +60,7 @@ export default function ProductHighlights() {
               whileHover={{ scale: 1.05 }}
               className="group cursor-pointer"
             >
-              <div className="relative overflow-hidden rounded-2xl bg-white shadow-lg group-hover:shadow-xl transition-all duration-300">
+              <div className="relative overflow-hidden rounded-2xl bg-white shadow-lg group-hover:shadow-xl transition-all duration-300 min-w-[260px] lg:min-w-0">
                 <div className={`absolute inset-0 bg-gradient-to-br ${product.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
                 
                 <div className="relative p-6">

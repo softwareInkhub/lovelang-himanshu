@@ -50,95 +50,98 @@ export default function ProductShowcase() {
           </p>
         </motion.div>
 
-        <div className="space-y-20">
+        {/* Horizontal Featured Collections Display */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-12">
           {featuredProducts.map((product, index) => (
             <motion.div
               key={product.name}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: index * 0.2 }}
-              className={`${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} 
-                         flex flex-col lg:flex gap-12 lg:gap-20 items-center`}
+              whileHover={{ y: -10 }}
+              className="group"
             >
-              {/* Product Image */}
-              <div className="flex-1">
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                  className={`relative overflow-hidden rounded-3xl bg-gradient-to-br ${product.color} p-8`}
-                >
-                  <img
-                    src={product.image}
-                    alt={`${product.name} - ${product.subtitle}`}
-                    className="w-full h-96 object-cover rounded-2xl shadow-2xl"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent rounded-3xl"></div>
-                </motion.div>
-              </div>
-
-              {/* Product Content */}
-              <div className="flex-1 space-y-6">
-                <div>
-                  <motion.p
-                    initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.6, delay: 0.3 }}
-                    className={`${product.textColor} font-semibold text-lg mb-2`}
+              <div className={`relative overflow-hidden rounded-3xl bg-gradient-to-br ${product.color} p-6 lg:p-8 h-full shadow-xl group-hover:shadow-2xl transition-all duration-300`}>
+                {/* Product Image */}
+                <div className="relative mb-6">
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                    className="aspect-square overflow-hidden rounded-2xl bg-white/60 backdrop-blur-sm shadow-lg"
                   >
-                    {product.subtitle}
-                  </motion.p>
-                  <motion.h3
-                    initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.6, delay: 0.4 }}
-                    className="text-3xl lg:text-4xl font-bold text-stone-900 mb-4"
-                  >
-                    {product.name}
-                  </motion.h3>
+                    <img
+                      src={product.image}
+                      alt={`${product.name} - ${product.subtitle}`}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                  </motion.div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent rounded-2xl"></div>
                 </div>
 
-                <motion.p
-                  initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: 0.5 }}
-                  className="text-lg text-stone-700 leading-relaxed"
-                >
-                  {product.description}
-                </motion.p>
+                {/* Product Content */}
+                <div className="space-y-4 text-center">
+                  <div>
+                    <motion.p
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+                      className={`${product.textColor} font-semibold text-sm lg:text-base mb-2`}
+                    >
+                      {product.subtitle}
+                    </motion.p>
+                    <motion.h3
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
+                      className="text-xl lg:text-2xl xl:text-3xl font-bold text-stone-900 mb-3"
+                    >
+                      {product.name}
+                    </motion.h3>
+                  </div>
 
-                <motion.div
-                  initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: 0.6 }}
-                  className="flex flex-col sm:flex-row gap-4"
-                >
-                  <Button 
-                    onClick={() => {
-                      document.getElementById('best-sellers')?.scrollIntoView({ behavior: 'smooth' });
-                      setTimeout(() => {
-                        let categoryBtn: HTMLButtonElement | null = null;
-                        if (product.name.includes("Mango")) {
-                          categoryBtn = document.querySelector('[data-category="frizz"]') as HTMLButtonElement;
-                        } else if (product.name.includes("Peach")) {
-                          categoryBtn = document.querySelector('[data-category="hair-fall"]') as HTMLButtonElement;
-                        } else if (product.name.includes("Avocado")) {
-                          categoryBtn = document.querySelector('[data-category="damage"]') as HTMLButtonElement;
-                        }
-                        categoryBtn?.click();
-                      }, 500);
-                    }}
-                    className={`${product.buttonColor} px-8 py-3 rounded-full font-semibold transition-all`}
+                  <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
+                    className="text-sm lg:text-base text-stone-700 leading-relaxed"
                   >
-                    Shop {product.name.split(' ')[0]} Range
-                  </Button>
-                  <Button 
-                    variant="outline"
-                    onClick={() => document.getElementById('key-ingredients')?.scrollIntoView({ behavior: 'smooth' })}
-                    className="px-8 py-3 rounded-full font-semibold border-2 border-stone-300 text-stone-700 hover:bg-stone-100"
+                    {product.description}
+                  </motion.p>
+
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
+                    className="space-y-3 pt-4"
                   >
-                    Learn More
-                  </Button>
-                </motion.div>
+                    <Button 
+                      onClick={() => {
+                        document.getElementById('best-sellers')?.scrollIntoView({ behavior: 'smooth' });
+                        setTimeout(() => {
+                          let categoryBtn: HTMLButtonElement | null = null;
+                          if (product.name.includes("Mango")) {
+                            categoryBtn = document.querySelector('[data-category="frizz"]') as HTMLButtonElement;
+                          } else if (product.name.includes("Peach")) {
+                            categoryBtn = document.querySelector('[data-category="hair-fall"]') as HTMLButtonElement;
+                          } else if (product.name.includes("Avocado")) {
+                            categoryBtn = document.querySelector('[data-category="damage"]') as HTMLButtonElement;
+                          }
+                          categoryBtn?.click();
+                        }, 500);
+                      }}
+                      className={`${product.buttonColor} w-full px-6 py-2.5 lg:py-3 rounded-full font-semibold text-sm lg:text-base transition-all group-hover:shadow-lg`}
+                    >
+                      Shop {product.name.split(' ')[0]} Range
+                    </Button>
+                    <Button 
+                      variant="outline"
+                      onClick={() => document.getElementById('key-ingredients')?.scrollIntoView({ behavior: 'smooth' })}
+                      className="w-full px-6 py-2.5 lg:py-3 rounded-full font-semibold text-sm lg:text-base border-2 border-stone-300 text-stone-700 hover:bg-white/80 backdrop-blur-sm"
+                    >
+                      Learn More
+                    </Button>
+                  </motion.div>
+                </div>
               </div>
             </motion.div>
           ))}

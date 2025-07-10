@@ -11,7 +11,8 @@ const categories = [
     image: LOVELANG_IMAGES.collections.mango,
     bg: "from-orange-100 to-yellow-50",
     textColor: "text-orange-600",
-    buttonColor: "bg-white text-orange-600 hover:bg-orange-50"
+    buttonColor: "bg-white text-orange-600 hover:bg-orange-50",
+    slug: "mango"
   },
   {
     name: "Peach",
@@ -20,7 +21,8 @@ const categories = [
     image: LOVELANG_IMAGES.products.peach.icon,
     bg: "from-red-100 to-pink-50",
     textColor: "text-red-600",
-    buttonColor: "bg-white text-red-600 hover:bg-red-50"
+    buttonColor: "bg-white text-red-600 hover:bg-red-50",
+    slug: "peach"
   },
   {
     name: "Avocado",
@@ -29,7 +31,8 @@ const categories = [
     image: LOVELANG_IMAGES.collections.avocado,
     bg: "from-green-100 to-emerald-50",
     textColor: "text-green-600",
-    buttonColor: "bg-white text-green-600 hover:bg-green-50"
+    buttonColor: "bg-white text-green-600 hover:bg-green-50",
+    slug: "avocado"
   }
 ];
 
@@ -53,48 +56,34 @@ export default function ProductCategories() {
         
         <div className="md:grid md:grid-cols-3 md:gap-8 flex md:flex-none overflow-x-auto gap-6 pb-4 md:pb-0 scrollbar-hide">
           {categories.map((category, index) => (
-            <motion.div
-              key={category.name}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.2 }}
-              whileHover={{ scale: 1.05 }}
-              className="group cursor-pointer"
-            >
-              <div className={`relative overflow-hidden rounded-3xl bg-gradient-to-br ${category.bg} p-8 h-96 min-w-[280px] md:min-w-0`}>
-                <img
-                  src={category.image}
-                  alt={`Fresh ${category.name.toLowerCase()}`}
-                  className="absolute top-4 right-4 w-24 h-24 object-cover rounded-full shadow-lg"
-                />
-                
-                <div className="relative z-10 h-full flex flex-col justify-end">
-                  <h3 className="text-2xl lg:text-3xl font-bold text-stone-900 mb-2">{category.name}</h3>
-                  <p className={`${category.textColor} font-semibold mb-4 text-sm lg:text-base`}>{category.for}</p>
-                  <p className="text-stone-700 mb-6 text-sm lg:text-base">{category.description}</p>
-                  <Button 
-                    onClick={() => {
-                      document.getElementById('best-sellers')?.scrollIntoView({ behavior: 'smooth' });
-                      // Trigger category filter based on category
-                      setTimeout(() => {
-                        let categoryBtn: HTMLButtonElement | null = null;
-                        if (category.name === "Mango") {
-                          categoryBtn = document.querySelector('[data-category="frizz"]') as HTMLButtonElement;
-                        } else if (category.name === "Peach") {
-                          categoryBtn = document.querySelector('[data-category="hair-fall"]') as HTMLButtonElement;
-                        } else if (category.name === "Avocado") {
-                          categoryBtn = document.querySelector('[data-category="damage"]') as HTMLButtonElement;
-                        }
-                        categoryBtn?.click();
-                      }, 500);
-                    }}
-                    className={`${category.buttonColor} self-start transition-colors text-sm lg:text-base px-4 py-2 lg:px-6 lg:py-3`}
-                  >
-                    Shop {category.name} Range
-                  </Button>
+            <Link key={category.name} href={`/collections/${category.slug}`}>
+              <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: index * 0.2 }}
+                whileHover={{ scale: 1.05 }}
+                className="group cursor-pointer"
+              >
+                <div className={`relative overflow-hidden rounded-3xl bg-gradient-to-br ${category.bg} p-8 h-96 min-w-[280px] md:min-w-0 transition-all duration-300 hover:shadow-2xl`}>
+                  <img
+                    src={category.image}
+                    alt={`Fresh ${category.name.toLowerCase()}`}
+                    className="absolute top-4 right-4 w-24 h-24 object-cover rounded-full shadow-lg"
+                  />
+                  
+                  <div className="relative z-10 h-full flex flex-col justify-end">
+                    <h3 className="text-2xl lg:text-3xl font-bold text-stone-900 mb-2">{category.name}</h3>
+                    <p className={`${category.textColor} font-semibold mb-4 text-sm lg:text-base`}>{category.for}</p>
+                    <p className="text-stone-700 mb-6 text-sm lg:text-base">{category.description}</p>
+                    <Button 
+                      className={`${category.buttonColor} self-start transition-colors text-sm lg:text-base px-4 py-2 lg:px-6 lg:py-3 group-hover:scale-105 transition-transform`}
+                    >
+                      Shop {category.name} Range
+                    </Button>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            </Link>
           ))}
         </div>
       </div>

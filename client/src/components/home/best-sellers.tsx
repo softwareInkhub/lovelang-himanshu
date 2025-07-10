@@ -7,10 +7,21 @@ import products from "@/data/products.json";
 
 export default function BestSellers() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [selectedCategory, setSelectedCategory] = useState("all");
   const itemsPerPage = 3;
-  const totalPages = Math.ceil(products.length / itemsPerPage);
   
-  const currentProducts = products.slice(
+  const filteredProducts = selectedCategory === "all" 
+    ? products 
+    : products.filter(product => {
+        if (selectedCategory === "hair-fall") return product.category.toLowerCase().includes("hair fall");
+        if (selectedCategory === "frizz") return product.category.toLowerCase().includes("frizzy");
+        if (selectedCategory === "damage") return product.category.toLowerCase().includes("damaged");
+        return true;
+      });
+  
+  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+  
+  const currentProducts = filteredProducts.slice(
     currentIndex * itemsPerPage,
     (currentIndex + 1) * itemsPerPage
   );
@@ -23,6 +34,11 @@ export default function BestSellers() {
     setCurrentIndex((prev) => (prev < totalPages - 1 ? prev + 1 : 0));
   };
 
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategory(category);
+    setCurrentIndex(0);
+  };
+
   return (
     <section id="best-sellers" className="py-20 bg-stone-50">
       <div className="container mx-auto px-4">
@@ -30,25 +46,66 @@ export default function BestSellers() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="flex items-center justify-between mb-12"
+          className="mb-12"
         >
-          <h2 className="text-3xl lg:text-4xl font-bold">Best Sellers</h2>
-          <div className="flex space-x-2">
-            <Button 
-              variant="outline" 
-              size="sm" 
-              className="w-10 h-10 lg:w-12 lg:h-12 rounded-full"
-              onClick={handlePrevious}
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-8">
+            <h2 className="text-3xl lg:text-4xl font-bold mb-4 lg:mb-0">Best Sellers</h2>
+            <div className="flex space-x-2">
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="w-10 h-10 lg:w-12 lg:h-12 rounded-full"
+                onClick={handlePrevious}
+              >
+                <ChevronLeft className="w-4 h-4 lg:w-5 lg:h-5" />
+              </Button>
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="w-10 h-10 lg:w-12 lg:h-12 rounded-full"
+                onClick={handleNext}
+              >
+                <ChevronRight className="w-4 h-4 lg:w-5 lg:h-5" />
+              </Button>
+            </div>
+          </div>
+
+          {/* Category Filter */}
+          <div className="flex flex-wrap gap-3 mb-8">
+            <Button
+              variant={selectedCategory === "all" ? "default" : "outline"}
+              size="sm"
+              onClick={() => handleCategoryChange("all")}
+              className="text-xs lg:text-sm"
             >
-              <ChevronLeft className="w-4 h-4 lg:w-5 lg:h-5" />
+              All Products
             </Button>
-            <Button 
-              variant="outline" 
-              size="sm" 
-              className="w-10 h-10 lg:w-12 lg:h-12 rounded-full"
-              onClick={handleNext}
+            <Button
+              variant={selectedCategory === "hair-fall" ? "default" : "outline"}
+              size="sm"
+              onClick={() => handleCategoryChange("hair-fall")}
+              className="text-xs lg:text-sm"
+              data-category="hair-fall"
             >
-              <ChevronRight className="w-4 h-4 lg:w-5 lg:h-5" />
+              For Hair Fall
+            </Button>
+            <Button
+              variant={selectedCategory === "frizz" ? "default" : "outline"}
+              size="sm"
+              onClick={() => handleCategoryChange("frizz")}
+              className="text-xs lg:text-sm"
+              data-category="frizz"
+            >
+              For Frizz
+            </Button>
+            <Button
+              variant={selectedCategory === "damage" ? "default" : "outline"}
+              size="sm"
+              onClick={() => handleCategoryChange("damage")}
+              className="text-xs lg:text-sm"
+              data-category="damage"
+            >
+              For Damage
             </Button>
           </div>
         </motion.div>

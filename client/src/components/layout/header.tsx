@@ -24,15 +24,43 @@ export default function Header() {
               <Link href="/" className="text-sm lg:text-base text-stone-700 hover:text-primary-600 transition-colors">
                 Our Hair Kit
               </Link>
-              <a href="#peach-products" className="text-sm lg:text-base text-stone-700 hover:text-primary-600 transition-colors">
+              <button 
+                onClick={() => {
+                  document.getElementById('best-sellers')?.scrollIntoView({ behavior: 'smooth' });
+                  // Trigger category filter
+                  setTimeout(() => {
+                    const hairFallBtn = document.querySelector('[data-category="hair-fall"]') as HTMLButtonElement;
+                    hairFallBtn?.click();
+                  }, 500);
+                }}
+                className="text-sm lg:text-base text-stone-700 hover:text-primary-600 transition-colors cursor-pointer"
+              >
                 For Hair Fall
-              </a>
-              <a href="#mango-products" className="text-sm lg:text-base text-stone-700 hover:text-primary-600 transition-colors">
+              </button>
+              <button 
+                onClick={() => {
+                  document.getElementById('best-sellers')?.scrollIntoView({ behavior: 'smooth' });
+                  setTimeout(() => {
+                    const frizzBtn = document.querySelector('[data-category="frizz"]') as HTMLButtonElement;
+                    frizzBtn?.click();
+                  }, 500);
+                }}
+                className="text-sm lg:text-base text-stone-700 hover:text-primary-600 transition-colors cursor-pointer"
+              >
                 For Frizz
-              </a>
-              <a href="#avocado-products" className="text-sm lg:text-base text-stone-700 hover:text-primary-600 transition-colors">
+              </button>
+              <button 
+                onClick={() => {
+                  document.getElementById('best-sellers')?.scrollIntoView({ behavior: 'smooth' });
+                  setTimeout(() => {
+                    const damageBtn = document.querySelector('[data-category="damage"]') as HTMLButtonElement;
+                    damageBtn?.click();
+                  }, 500);
+                }}
+                className="text-sm lg:text-base text-stone-700 hover:text-primary-600 transition-colors cursor-pointer"
+              >
                 For Damage
-              </a>
+              </button>
             </nav>
             
             <div className="flex items-center space-x-2 lg:space-x-4">
@@ -70,15 +98,45 @@ export default function Header() {
                     <Link href="/" className="text-stone-700 hover:text-primary-600 transition-colors">
                       Our Hair Kit
                     </Link>
-                    <a href="#peach-products" className="text-stone-700 hover:text-primary-600 transition-colors">
+                    <button 
+                      onClick={() => {
+                        document.getElementById('best-sellers')?.scrollIntoView({ behavior: 'smooth' });
+                        setTimeout(() => {
+                          const hairFallBtn = document.querySelector('[data-category="hair-fall"]') as HTMLButtonElement;
+                          hairFallBtn?.click();
+                        }, 500);
+                        document.querySelector('[data-state="open"] button')?.click();
+                      }}
+                      className="text-stone-700 hover:text-primary-600 transition-colors text-left"
+                    >
                       For Hair Fall
-                    </a>
-                    <a href="#mango-products" className="text-stone-700 hover:text-primary-600 transition-colors">
+                    </button>
+                    <button 
+                      onClick={() => {
+                        document.getElementById('best-sellers')?.scrollIntoView({ behavior: 'smooth' });
+                        setTimeout(() => {
+                          const frizzBtn = document.querySelector('[data-category="frizz"]') as HTMLButtonElement;
+                          frizzBtn?.click();
+                        }, 500);
+                        document.querySelector('[data-state="open"] button')?.click();
+                      }}
+                      className="text-stone-700 hover:text-primary-600 transition-colors text-left"
+                    >
                       For Frizz
-                    </a>
-                    <a href="#avocado-products" className="text-stone-700 hover:text-primary-600 transition-colors">
+                    </button>
+                    <button 
+                      onClick={() => {
+                        document.getElementById('best-sellers')?.scrollIntoView({ behavior: 'smooth' });
+                        setTimeout(() => {
+                          const damageBtn = document.querySelector('[data-category="damage"]') as HTMLButtonElement;
+                          damageBtn?.click();
+                        }, 500);
+                        document.querySelector('[data-state="open"] button')?.click();
+                      }}
+                      className="text-stone-700 hover:text-primary-600 transition-colors text-left"
+                    >
                       For Damage
-                    </a>
+                    </button>
                   </nav>
                 </SheetContent>
               </Sheet>

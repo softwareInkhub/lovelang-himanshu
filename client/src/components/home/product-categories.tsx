@@ -43,7 +43,7 @@ export default function ProductCategories() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Choose Your <span className="text-primary-600 italic">Love Language</span>
+            Choose Your <span className="text-orange-600 italic">Love Language</span>
           </h2>
           <p className="text-xl text-stone-600 max-w-3xl mx-auto">
             Each range is designed to target a specific hair concern with real, visible results.

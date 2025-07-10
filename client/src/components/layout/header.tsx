@@ -16,14 +16,14 @@ export default function Header() {
       <header className="bg-white shadow-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <Link href="/" className="text-xl lg:text-2xl font-bold text-primary-600">
+            <Link href="/" className="text-xl lg:text-2xl font-bold text-stone-900">
               lovelang.
             </Link>
             
             <nav className="hidden md:flex space-x-6 lg:space-x-8">
               <button 
                 onClick={() => document.getElementById('best-sellers')?.scrollIntoView({ behavior: 'smooth' })}
-                className="text-sm lg:text-base text-stone-700 hover:text-primary-600 transition-colors cursor-pointer"
+                className="text-sm lg:text-base text-stone-700 hover:text-orange-600 transition-colors cursor-pointer"
               >
                 Our Hair Kit
               </button>
@@ -36,7 +36,7 @@ export default function Header() {
                     hairFallBtn?.click();
                   }, 500);
                 }}
-                className="text-sm lg:text-base text-stone-700 hover:text-primary-600 transition-colors cursor-pointer"
+                className="text-sm lg:text-base text-stone-700 hover:text-orange-600 transition-colors cursor-pointer"
               >
                 For Hair Fall
               </button>
@@ -48,7 +48,7 @@ export default function Header() {
                     frizzBtn?.click();
                   }, 500);
                 }}
-                className="text-sm lg:text-base text-stone-700 hover:text-primary-600 transition-colors cursor-pointer"
+                className="text-sm lg:text-base text-stone-700 hover:text-orange-600 transition-colors cursor-pointer"
               >
                 For Frizz
               </button>
@@ -60,7 +60,7 @@ export default function Header() {
                     damageBtn?.click();
                   }, 500);
                 }}
-                className="text-sm lg:text-base text-stone-700 hover:text-primary-600 transition-colors cursor-pointer"
+                className="text-sm lg:text-base text-stone-700 hover:text-orange-600 transition-colors cursor-pointer"
               >
                 For Damage
               </button>
@@ -103,7 +103,7 @@ export default function Header() {
                         document.getElementById('best-sellers')?.scrollIntoView({ behavior: 'smooth' });
                         document.querySelector('[data-state="open"] button')?.click();
                       }}
-                      className="text-stone-700 hover:text-primary-600 transition-colors text-left"
+                      className="text-stone-700 hover:text-orange-600 transition-colors text-left"
                     >
                       Our Hair Kit
                     </button>
@@ -116,7 +116,7 @@ export default function Header() {
                         }, 500);
                         document.querySelector('[data-state="open"] button')?.click();
                       }}
-                      className="text-stone-700 hover:text-primary-600 transition-colors text-left"
+                      className="text-stone-700 hover:text-orange-600 transition-colors text-left"
                     >
                       For Hair Fall
                     </button>
@@ -129,7 +129,7 @@ export default function Header() {
                         }, 500);
                         document.querySelector('[data-state="open"] button')?.click();
                       }}
-                      className="text-stone-700 hover:text-primary-600 transition-colors text-left"
+                      className="text-stone-700 hover:text-orange-600 transition-colors text-left"
                     >
                       For Frizz
                     </button>
@@ -142,7 +142,7 @@ export default function Header() {
                         }, 500);
                         document.querySelector('[data-state="open"] button')?.click();
                       }}
-                      className="text-stone-700 hover:text-primary-600 transition-colors text-left"
+                      className="text-stone-700 hover:text-orange-600 transition-colors text-left"
                     >
                       For Damage
                     </button>

@@ -49,7 +49,7 @@ export default function BestSellers() {
           className="mb-12"
         >
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-8">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-4 lg:mb-0">Best Sellers</h2>
+            <h2 className="text-3xl lg:text-4xl font-bold mb-4 lg:mb-0">Best <span className="text-orange-600 italic">Sellers</span></h2>
             <div className="flex space-x-2">
               <Button 
                 variant="outline" 

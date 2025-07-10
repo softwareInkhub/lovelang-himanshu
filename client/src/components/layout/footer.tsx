@@ -24,7 +24,7 @@ export default function Footer() {
     <footer className="bg-stone-900 text-white py-16">
       <div className="container mx-auto px-4">
         {/* Newsletter Section */}
-        <div className="text-center mb-16 bg-gradient-to-r from-primary-600 to-primary-700 rounded-3xl p-8 lg:p-12">
+        <div className="text-center mb-16 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-3xl p-8 lg:p-12">
           <h3 className="text-2xl lg:text-3xl font-bold mb-4">
             Get <span className="italic">early access</span> to launches, offers, and all things about lovelang
           </h3>
@@ -37,32 +37,32 @@ export default function Footer() {
               className="flex-1 bg-white text-stone-900"
               required
             />
-            <Button type="submit" variant="secondary" className="bg-white text-primary-600 hover:bg-stone-100">
+            <Button type="submit" variant="secondary" className="bg-white text-orange-600 hover:bg-stone-100">
               Subscribe
             </Button>
           </form>
-          <p className="text-primary-100 text-sm mt-4">
+          <p className="text-orange-100 text-sm mt-4">
             By signing up, you agree with our privacy policy.
           </p>
         </div>
 
         <div className="grid md:grid-cols-4 gap-8 mb-12">
           <div>
-            <div className="text-2xl font-bold text-primary-400 mb-6">lovelang.</div>
+            <div className="text-2xl font-bold text-yellow-400 mb-6">lovelang.</div>
             <p className="text-stone-300 mb-6">
               Fruit-powered, science-backed hair care solutions for every hair concern.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="hover:text-primary-400 transition-colors">
+              <a href="#" className="hover:text-yellow-400 transition-colors">
                 <Instagram className="w-6 h-6" />
               </a>
-              <a href="#" className="hover:text-primary-400 transition-colors">
+              <a href="#" className="hover:text-yellow-400 transition-colors">
                 <Facebook className="w-6 h-6" />
               </a>
-              <a href="#" className="hover:text-primary-400 transition-colors">
+              <a href="#" className="hover:text-yellow-400 transition-colors">
                 <Twitter className="w-6 h-6" />
               </a>
-              <a href="#" className="hover:text-primary-400 transition-colors">
+              <a href="#" className="hover:text-yellow-400 transition-colors">
                 <Youtube className="w-6 h-6" />
               </a>
             </div>

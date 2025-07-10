@@ -36,7 +36,7 @@ export default function KeyIngredients() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
-            Key <span className="text-primary-600 italic">Active</span> Ingredients
+            Key <span className="text-orange-600 italic">Active</span> Ingredients
           </h2>
           <p className="text-lg lg:text-xl text-stone-600 max-w-4xl mx-auto">
             Our formulas are built around three powerhouse actives: Biotin to reduce hair fall, 

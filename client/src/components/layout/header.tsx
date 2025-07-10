@@ -21,9 +21,12 @@ export default function Header() {
             </Link>
             
             <nav className="hidden md:flex space-x-6 lg:space-x-8">
-              <Link href="/" className="text-sm lg:text-base text-stone-700 hover:text-primary-600 transition-colors">
+              <button 
+                onClick={() => document.getElementById('best-sellers')?.scrollIntoView({ behavior: 'smooth' })}
+                className="text-sm lg:text-base text-stone-700 hover:text-primary-600 transition-colors cursor-pointer"
+              >
                 Our Hair Kit
-              </Link>
+              </button>
               <button 
                 onClick={() => {
                   document.getElementById('best-sellers')?.scrollIntoView({ behavior: 'smooth' });
@@ -95,9 +98,15 @@ export default function Header() {
                 </SheetTrigger>
                 <SheetContent>
                   <nav className="flex flex-col space-y-4 mt-8">
-                    <Link href="/" className="text-stone-700 hover:text-primary-600 transition-colors">
+                    <button 
+                      onClick={() => {
+                        document.getElementById('best-sellers')?.scrollIntoView({ behavior: 'smooth' });
+                        document.querySelector('[data-state="open"] button')?.click();
+                      }}
+                      className="text-stone-700 hover:text-primary-600 transition-colors text-left"
+                    >
                       Our Hair Kit
-                    </Link>
+                    </button>
                     <button 
                       onClick={() => {
                         document.getElementById('best-sellers')?.scrollIntoView({ behavior: 'smooth' });

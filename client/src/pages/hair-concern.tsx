@@ -14,7 +14,7 @@ const hairConcernData = {
   "frizz": {
     name: "Anti-Frizz Range",
     description: "Hyaluronic Complex hydrates deeply and smooths rough cuticles to reduce frizz",
-    heroImage: LOVELANG_IMAGES.hero.banner1,
+    heroImage: LOVELANG_IMAGES.banners.skinificationBanner,
     color: "from-orange-200 to-yellow-100",
     bgColor: "bg-gradient-to-br from-orange-300 to-yellow-200",
     textColor: "text-orange-800",
@@ -35,7 +35,7 @@ const hairConcernData = {
   "hair-fall": {
     name: "Volume Boost Range", 
     description: "Biotin and protein complexes strengthen roots and reduce hair fall effectively",
-    heroImage: LOVELANG_IMAGES.hero.banner2,
+    heroImage: LOVELANG_IMAGES.banners.fruitPoweredBanner,
     color: "from-pink-200 to-red-100",
     bgColor: "bg-gradient-to-br from-pink-300 to-red-200",
     textColor: "text-pink-800",
@@ -56,7 +56,7 @@ const hairConcernData = {
   "damage": {
     name: "Damage Repair Range",
     description: "Ceramides repair damage and restore strength for healthier, softer hair",
-    heroImage: LOVELANG_IMAGES.hero.banner3,
+    heroImage: LOVELANG_IMAGES.banners.loveLanguageBanner,
     color: "from-green-200 to-emerald-100", 
     bgColor: "bg-gradient-to-br from-green-300 to-emerald-200",
     textColor: "text-green-800",

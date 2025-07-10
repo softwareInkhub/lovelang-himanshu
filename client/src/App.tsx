@@ -7,6 +7,7 @@ import { AnimatePresence } from "framer-motion";
 import Home from "@/pages/home";
 import ProductDetail from "@/pages/product-detail";
 import Collection from "@/pages/collection";
+import HairConcern from "@/pages/hair-concern";
 import Cart from "@/pages/cart";
 import Checkout from "@/pages/checkout";
 import ThankYou from "@/pages/thank-you";
@@ -26,6 +27,7 @@ function Router() {
             <Route path="/" component={Home} />
             <Route path="/products/:slug" component={ProductDetail} />
             <Route path="/collections/:collection" component={Collection} />
+            <Route path="/hair-concerns/:concern" component={HairConcern} />
             <Route path="/cart" component={Cart} />
             <Route path="/checkout" component={Checkout} />
             <Route path="/thank-you" component={ThankYou} />

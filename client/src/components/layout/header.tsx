@@ -73,21 +73,21 @@ export default function Header() {
               </Button>
               <Button
                 variant="ghost"
-                onClick={() => navigateToSection('best-sellers', 'hair-fall')}
+                onClick={() => navigate('/hair-concerns/hair-fall')}
                 className="text-sm lg:text-base text-stone-700 hover:text-orange-600 hover:bg-red-50 transition-all duration-200 font-medium px-3 lg:px-4"
               >
                 For Hair Fall
               </Button>
               <Button
                 variant="ghost"
-                onClick={() => navigateToSection('best-sellers', 'frizz')}
+                onClick={() => navigate('/hair-concerns/frizz')}
                 className="text-sm lg:text-base text-stone-700 hover:text-orange-600 hover:bg-yellow-50 transition-all duration-200 font-medium px-3 lg:px-4"
               >
                 For Frizz
               </Button>
               <Button
                 variant="ghost"
-                onClick={() => navigateToSection('best-sellers', 'damage')}
+                onClick={() => navigate('/hair-concerns/damage')}
                 className="text-sm lg:text-base text-stone-700 hover:text-orange-600 hover:bg-green-50 transition-all duration-200 font-medium px-3 lg:px-4"
               >
                 For Damage
@@ -171,7 +171,7 @@ export default function Header() {
                         <Button
                           variant="ghost"
                           onClick={() => {
-                            navigateToSection('best-sellers', 'hair-fall');
+                            navigate('/hair-concerns/hair-fall');
                             document.querySelector('[data-state="open"] button')?.click();
                           }}
                           className="w-full justify-start text-stone-700 hover:text-orange-600 hover:bg-red-50 transition-all"
@@ -181,7 +181,7 @@ export default function Header() {
                         <Button
                           variant="ghost"
                           onClick={() => {
-                            navigateToSection('best-sellers', 'frizz');
+                            navigate('/hair-concerns/frizz');
                             document.querySelector('[data-state="open"] button')?.click();
                           }}
                           className="w-full justify-start text-stone-700 hover:text-orange-600 hover:bg-yellow-50 transition-all"
@@ -191,7 +191,7 @@ export default function Header() {
                         <Button
                           variant="ghost"
                           onClick={() => {
-                            navigateToSection('best-sellers', 'damage');
+                            navigate('/hair-concerns/damage');
                             document.querySelector('[data-state="open"] button')?.click();
                           }}
                           className="w-full justify-start text-stone-700 hover:text-orange-600 hover:bg-green-50 transition-all"

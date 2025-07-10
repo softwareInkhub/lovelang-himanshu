@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ShoppingCart, Star, Heart } from "lucide-react";
 import { useCartStore } from "@/store/cart-store";
 import { useFavoritesStore } from "@/store/favorites-store";
+import { toast } from "@/hooks/use-toast";
 import { Product } from "@/types/product";
 
 interface ProductCardProps {
@@ -20,12 +21,26 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
     addToCart(product, 1);
+    toast({
+      title: "Added to Cart!",
+      description: `${product.name} has been added to your cart`,
+      duration: 3000,
+    });
   };
 
   const handleToggleFavorite = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    const wasFavorite = isFavorite(product.id);
     toggleFavorite(product);
+    
+    toast({
+      title: wasFavorite ? "Removed from Wishlist" : "Added to Wishlist!",
+      description: wasFavorite 
+        ? `${product.name} has been removed from your wishlist`
+        : `${product.name} has been added to your wishlist`,
+      duration: 2000,
+    });
   };
 
   return (

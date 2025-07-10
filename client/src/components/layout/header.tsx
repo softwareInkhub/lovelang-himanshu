@@ -4,13 +4,17 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Search, ShoppingBag, Menu } from "lucide-react";
 import { useCartStore } from "@/store/cart-store";
+import { useAuth } from "@/hooks/useAuth";
 import SearchDialog from "@/components/ui/search-dialog";
+import LoginButton from "@/components/auth/login-button";
+import UserProfile from "@/components/auth/user-profile";
 
 export default function Header() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const { items, toggleDrawer } = useCartStore();
   const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
   const [location, navigate] = useLocation();
+  const { isAuthenticated, isLoading } = useAuth();
 
   const navigateToSection = (sectionId: string, category?: string) => {
     if (location !== '/') {
@@ -103,6 +107,15 @@ export default function Header() {
                   </span>
                 )}
               </Button>
+
+              {/* Auth Section */}
+              {!isLoading && (
+                isAuthenticated ? (
+                  <UserProfile />
+                ) : (
+                  <LoginButton size="sm" />
+                )
+              )}
               
               <Sheet>
                 <SheetTrigger asChild>

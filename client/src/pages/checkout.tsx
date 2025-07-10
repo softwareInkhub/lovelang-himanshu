@@ -1,19 +1,27 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
+import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/hooks/use-toast";
 import { CreditCard, Smartphone, Truck } from "lucide-react";
 import { useCartStore } from "@/store/cart-store";
+import LoginButton from "@/components/auth/login-button";
+import { isUnauthorizedError } from "@/lib/authUtils";
+import { apiRequest } from "@/lib/queryClient";
 
 export default function Checkout() {
   const [, setLocation] = useLocation();
   const { items, total, clearCart } = useCartStore();
+  const { isAuthenticated, isLoading, user } = useAuth();
+  const { toast } = useToast();
   const [paymentMethod, setPaymentMethod] = useState("razorpay");
+  const [isProcessing, setIsProcessing] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -25,17 +33,91 @@ export default function Checkout() {
     pinCode: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Redirect to login if not authenticated
+  useEffect(() => {
+    if (!isLoading && !isAuthenticated) {
+      toast({
+        title: "Authentication Required",
+        description: "Please log in to complete your purchase.",
+        variant: "destructive",
+      });
+      setTimeout(() => {
+        window.location.href = "/api/login";
+      }, 1000);
+      return;
+    }
+  }, [isAuthenticated, isLoading, toast]);
+
+  // Pre-fill form with user data
+  useEffect(() => {
+    if (user) {
+      setFormData(prev => ({
+        ...prev,
+        firstName: user.firstName || "",
+        lastName: user.lastName || "",
+        email: user.email || "",
+      }));
+    }
+  }, [user]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Simulate order processing
-    const orderId = `LL${Date.now()}`;
+    if (!isAuthenticated) {
+      toast({
+        title: "Authentication Required",
+        description: "Please log in to complete your purchase.",
+        variant: "destructive",
+      });
+      window.location.href = "/api/login";
+      return;
+    }
+
+    setIsProcessing(true);
     
-    // Clear cart
-    clearCart();
-    
-    // Navigate to thank you page
-    setLocation("/thank-you");
+    try {
+      const response = await apiRequest("/api/checkout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          items,
+          total,
+          formData,
+          paymentMethod,
+        }),
+      });
+
+      // Success - clear cart and navigate
+      clearCart();
+      setLocation("/thank-you");
+      
+      toast({
+        title: "Order Placed Successfully!",
+        description: "You will receive a confirmation email shortly.",
+      });
+    } catch (error: any) {
+      if (isUnauthorizedError(error)) {
+        toast({
+          title: "Authentication Required",
+          description: "Please log in to complete your purchase.",
+          variant: "destructive",
+        });
+        setTimeout(() => {
+          window.location.href = "/api/login";
+        }, 500);
+        return;
+      }
+      
+      toast({
+        title: "Order Failed",
+        description: "There was an error processing your order. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -44,6 +126,20 @@ export default function Checkout() {
       [e.target.name]: e.target.value,
     });
   };
+
+  // Show loading state
+  if (isLoading) {
+    return (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="container mx-auto px-4 py-20 text-center"
+      >
+        <h1 className="text-3xl font-bold mb-4">Loading...</h1>
+        <p className="text-stone-600">Please wait while we verify your authentication.</p>
+      </motion.div>
+    );
+  }
 
   if (items.length === 0) {
     return (
@@ -239,9 +335,21 @@ export default function Checkout() {
                 </CardContent>
               </Card>
               
-              <Button type="submit" className="w-full bg-primary-600 hover:bg-primary-700" size="lg">
-                Place Order
+              <Button 
+                type="submit" 
+                className="w-full bg-primary-600 hover:bg-primary-700" 
+                size="lg"
+                disabled={!isAuthenticated || isProcessing || isLoading}
+              >
+                {isLoading ? "Loading..." : isProcessing ? "Processing..." : !isAuthenticated ? "Login Required" : "Place Order"}
               </Button>
+              
+              {!isAuthenticated && !isLoading && (
+                <div className="text-center space-y-3">
+                  <p className="text-sm text-stone-600">You must be logged in to place an order</p>
+                  <LoginButton className="w-full" />
+                </div>
+              )}
             </div>
           </div>
         </form>

@@ -223,42 +223,23 @@ export default function Header() {
                       </nav>
                     </div>
                     
-                    <div className="mt-auto pb-6 space-y-3">
-                      {/* Wishlist Button */}
-                      <Button
-                        variant="ghost"
-                        onClick={() => {
-                          setIsWishlistOpen(true);
-                          document.querySelector('[data-state="open"] button')?.click();
-                        }}
-                        className="w-full justify-start p-4 bg-pink-50 hover:bg-pink-100 transition-all rounded-lg border"
-                      >
-                        <div className="flex items-center gap-3 w-full">
+                    <div className="mt-auto pb-6">
+                      <div className="flex items-center gap-4 p-4 bg-stone-50 rounded-lg">
+                        <div className="flex items-center gap-2">
                           <Heart className="w-5 h-5 text-pink-500" />
-                          <span className="text-sm font-medium text-stone-700">Wishlist</span>
+                          <span className="text-sm font-medium">Wishlist</span>
                           {favoritesCount > 0 && (
-                            <Badge className="bg-pink-500 text-white ml-auto">{favoritesCount}</Badge>
+                            <Badge className="bg-pink-500">{favoritesCount}</Badge>
                           )}
                         </div>
-                      </Button>
-
-                      {/* Cart Button */}
-                      <Button
-                        variant="ghost"
-                        onClick={() => {
-                          toggleDrawer();
-                          document.querySelector('[data-state="open"] button')?.click();
-                        }}
-                        className="w-full justify-start p-4 bg-orange-50 hover:bg-orange-100 transition-all rounded-lg border"
-                      >
-                        <div className="flex items-center gap-3 w-full">
+                        <div className="flex items-center gap-2">
                           <ShoppingBag className="w-5 h-5 text-orange-500" />
-                          <span className="text-sm font-medium text-stone-700">Cart</span>
+                          <span className="text-sm font-medium">Cart</span>
                           {itemCount > 0 && (
-                            <Badge className="bg-orange-500 text-white ml-auto">{itemCount}</Badge>
+                            <Badge className="bg-orange-500">{itemCount}</Badge>
                           )}
                         </div>
-                      </Button>
+                      </div>
                     </div>
                   </div>
                 </SheetContent>

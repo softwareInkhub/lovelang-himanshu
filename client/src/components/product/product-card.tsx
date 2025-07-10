@@ -57,7 +57,7 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
             <img
               src={product.images[0]}
               alt={product.name}
-              className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+              className="w-full h-48 sm:h-56 lg:h-64 object-cover group-hover:scale-105 transition-transform duration-300"
             />
             <Badge className="absolute top-4 left-4" variant="secondary">
               {product.category}
@@ -79,39 +79,39 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
           </div>
         </Link>
         
-        <CardContent className="p-4 lg:p-6 flex flex-col h-full">
+        <CardContent className="p-3 sm:p-4 lg:p-6 flex flex-col h-full">
           <Link href={`/products/${product.slug}`}>
-            <h3 className="text-lg lg:text-xl font-bold mb-2 hover:text-orange-600 transition-colors line-clamp-2">
+            <h3 className="text-sm sm:text-lg lg:text-xl font-bold mb-2 hover:text-orange-600 transition-colors line-clamp-2">
               {product.name}
             </h3>
           </Link>
           
-          <div className="flex items-center gap-2 mb-3">
+          <div className="flex items-center gap-1 sm:gap-2 mb-2 sm:mb-3">
             <div className="flex items-center">
               {[...Array(5)].map((_, i) => (
                 <Star
                   key={i}
-                  className={`w-4 h-4 ${
+                  className={`w-3 h-3 sm:w-4 sm:h-4 ${
                     i < Math.floor(product.rating) ? 'fill-yellow-400 text-yellow-400' : 'text-stone-300'
                   }`}
                 />
               ))}
             </div>
-            <span className="text-stone-600 text-sm">({product.reviews})</span>
+            <span className="text-stone-600 text-xs sm:text-sm">({product.reviews})</span>
           </div>
           
-          <p className="text-stone-600 mb-4 line-clamp-2 text-sm">{product.description}</p>
+          <p className="text-stone-600 mb-3 sm:mb-4 line-clamp-2 text-xs sm:text-sm">{product.description}</p>
           
-          <div className="flex flex-col gap-3 mt-auto">
+          <div className="flex flex-col gap-2 sm:gap-3 mt-auto">
             <div className="flex items-center justify-between">
-              <span className="text-xl lg:text-2xl font-bold text-orange-600">₹{product.price}</span>
+              <span className="text-lg sm:text-xl lg:text-2xl font-bold text-orange-600">₹{product.price}</span>
             </div>
             <Button
               onClick={handleAddToCart}
-              className="w-full bg-orange-600 hover:bg-orange-700 text-white flex items-center justify-center gap-2 font-semibold shadow-md"
+              className="w-full bg-orange-600 hover:bg-orange-700 text-white flex items-center justify-center gap-1 sm:gap-2 font-semibold shadow-md text-xs sm:text-sm"
               size="sm"
             >
-              <ShoppingCart className="w-4 h-4" />
+              <ShoppingCart className="w-3 h-3 sm:w-4 sm:h-4" />
               Add to Cart
             </Button>
           </div>

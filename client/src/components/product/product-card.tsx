@@ -34,7 +34,7 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.1 }}
       whileHover={{ y: -5 }}
-      className="group"
+      className="group min-w-[300px] lg:min-w-0"
     >
       <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
         <Link href={`/products/${product.slug}`}>

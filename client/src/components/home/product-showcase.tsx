@@ -51,7 +51,7 @@ export default function ProductShowcase() {
         </motion.div>
 
         {/* Horizontal Featured Collections Display */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-12">
+        <div className="lg:grid lg:grid-cols-3 lg:gap-12 md:grid md:grid-cols-2 md:gap-8 flex overflow-x-auto gap-6 pb-4 lg:pb-0 scrollbar-hide">
           {featuredProducts.map((product, index) => (
             <motion.div
               key={product.name}
@@ -61,7 +61,7 @@ export default function ProductShowcase() {
               whileHover={{ y: -10 }}
               className="group"
             >
-              <div className={`relative overflow-hidden rounded-3xl bg-gradient-to-br ${product.color} p-6 lg:p-8 h-full shadow-xl group-hover:shadow-2xl transition-all duration-300`}>
+              <div className={`relative overflow-hidden rounded-3xl bg-gradient-to-br ${product.color} p-6 lg:p-8 h-full shadow-xl group-hover:shadow-2xl transition-all duration-300 min-w-[300px] lg:min-w-0`}>
                 {/* Product Image */}
                 <div className="relative mb-6">
                   <motion.div

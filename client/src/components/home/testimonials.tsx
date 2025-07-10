@@ -18,14 +18,14 @@ export default function Testimonials() {
           <p className="text-xl text-stone-600">Real reviews from real customers who've transformed their hair.</p>
         </motion.div>
         
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="md:grid md:grid-cols-3 md:gap-8 flex overflow-x-auto gap-6 pb-4 md:pb-0 scrollbar-hide">
           {testimonials.map((testimonial, index) => (
             <motion.div
               key={testimonial.id}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: index * 0.2 }}
-              className="bg-stone-50 rounded-3xl p-8"
+              className="bg-stone-50 rounded-3xl p-8 min-w-[300px] md:min-w-0"
             >
               <div className="flex items-center mb-6">
                 <img

@@ -51,7 +51,7 @@ export default function ProductCategories() {
           </p>
         </motion.div>
         
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="md:grid md:grid-cols-3 md:gap-8 flex md:flex-none overflow-x-auto gap-6 pb-4 md:pb-0 scrollbar-hide">
           {categories.map((category, index) => (
             <motion.div
               key={category.name}
@@ -61,7 +61,7 @@ export default function ProductCategories() {
               whileHover={{ scale: 1.05 }}
               className="group cursor-pointer"
             >
-              <div className={`relative overflow-hidden rounded-3xl bg-gradient-to-br ${category.bg} p-8 h-96`}>
+              <div className={`relative overflow-hidden rounded-3xl bg-gradient-to-br ${category.bg} p-8 h-96 min-w-[280px] md:min-w-0`}>
                 <img
                   src={category.image}
                   alt={`Fresh ${category.name.toLowerCase()}`}

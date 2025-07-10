@@ -130,4 +130,6 @@ The application follows a modern full-stack architecture with clear separation o
 - **Before/After**: Enhanced with authentic product comparison images
 - **Best Sellers**: Products now use real LoveLang product photography
 - **Performance**: Implemented responsive image optimization with dynamic sizing
+- **Horizontal Scrolling**: Added mobile/tablet horizontal scrolling for key sections (Choose Your Love Language, Featured Collections, Best Sellers, Key Ingredients, Testimonials)
+- **Enhanced responsive design with mobile-first approach while preserving desktop layouts
 - **Documentation**: Created comprehensive image usage guide in README-IMAGES.md

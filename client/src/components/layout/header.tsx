@@ -138,16 +138,6 @@ export default function Header() {
                 )}
               </Button>
 
-              {/* Admin Link */}
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => navigate('/admin')}
-                className="hidden md:flex text-sm text-stone-700 hover:text-orange-600 hover:bg-orange-50 transition-all duration-200 font-medium px-3"
-              >
-                Admin
-              </Button>
-
               {/* Auth Section */}
               {!isLoading && (
                 isAuthenticated ? (
@@ -207,18 +197,6 @@ export default function Header() {
                           className="w-full justify-start text-stone-700 hover:text-orange-600 hover:bg-green-50 transition-all"
                         >
                           For Damage
-                        </Button>
-                        
-                        {/* Admin Link in Mobile Menu */}
-                        <Button
-                          variant="ghost"
-                          onClick={() => {
-                            navigate('/admin');
-                            document.querySelector('[data-state="open"] button')?.click();
-                          }}
-                          className="w-full justify-start text-stone-700 hover:text-orange-600 hover:bg-orange-50 transition-all"
-                        >
-                          Admin Panel
                         </Button>
                       </nav>
                     </div>

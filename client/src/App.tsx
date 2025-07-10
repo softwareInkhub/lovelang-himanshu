@@ -11,7 +11,6 @@ import HairConcern from "@/pages/hair-concern";
 import Cart from "@/pages/cart";
 import Checkout from "@/pages/checkout";
 import ThankYou from "@/pages/thank-you";
-import AdminDashboard from "@/pages/admin/dashboard";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import CartDrawer from "@/components/cart/cart-drawer";
@@ -32,7 +31,6 @@ function Router() {
             <Route path="/cart" component={Cart} />
             <Route path="/checkout" component={Checkout} />
             <Route path="/thank-you" component={ThankYou} />
-            <Route path="/admin" component={AdminDashboard} />
             <Route component={NotFound} />
           </Switch>
         </AnimatePresence>

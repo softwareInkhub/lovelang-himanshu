@@ -1,6 +1,6 @@
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
-import { Product } from '@/types/product';
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
+import type { Product } from "@/types/product";
 
 interface FavoritesState {
   favorites: Product[];
@@ -14,34 +14,29 @@ export const useFavoritesStore = create<FavoritesState>()(
   persist(
     (set, get) => ({
       favorites: [],
-      
-      addToFavorites: (product) => {
+      addToFavorites: (product) =>
         set((state) => ({
-          favorites: [...state.favorites, product]
-        }));
-      },
-      
-      removeFromFavorites: (productId) => {
+          favorites: [...state.favorites, product],
+        })),
+      removeFromFavorites: (productId) =>
         set((state) => ({
-          favorites: state.favorites.filter(item => item.id !== productId)
-        }));
-      },
-      
+          favorites: state.favorites.filter((product) => product.id !== productId),
+        })),
       isFavorite: (productId) => {
-        return get().favorites.some(item => item.id === productId);
+        const state = get();
+        return state.favorites.some((product) => product.id === productId);
       },
-      
       toggleFavorite: (product) => {
-        const { isFavorite, addToFavorites, removeFromFavorites } = get();
-        if (isFavorite(product.id)) {
-          removeFromFavorites(product.id);
+        const state = get();
+        if (state.isFavorite(product.id)) {
+          state.removeFromFavorites(product.id);
         } else {
-          addToFavorites(product);
+          state.addToFavorites(product);
         }
-      }
+      },
     }),
     {
-      name: 'favorites-storage',
+      name: "lovelang-favorites",
     }
   )
 );

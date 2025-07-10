@@ -12,6 +12,7 @@ import ThankYou from "@/pages/thank-you";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import CartDrawer from "@/components/cart/cart-drawer";
+import FloatingActions from "@/components/ui/floating-actions";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -32,6 +33,7 @@ function Router() {
       </main>
       <Footer />
       <CartDrawer />
+      <FloatingActions />
     </div>
   );
 }

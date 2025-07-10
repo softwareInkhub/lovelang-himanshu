@@ -142,7 +142,7 @@ export default function Header() {
               <Button
                 variant="ghost"
                 size="sm"
-                onClick={() => window.open('/admin-panel', '_blank')}
+                onClick={() => navigate('/admin')}
                 className="hidden md:flex text-sm text-stone-700 hover:text-orange-600 hover:bg-orange-50 transition-all duration-200 font-medium px-3"
               >
                 Admin
@@ -213,7 +213,7 @@ export default function Header() {
                         <Button
                           variant="ghost"
                           onClick={() => {
-                            window.open('/admin-panel', '_blank');
+                            navigate('/admin');
                             document.querySelector('[data-state="open"] button')?.click();
                           }}
                           className="w-full justify-start text-stone-700 hover:text-orange-600 hover:bg-orange-50 transition-all"

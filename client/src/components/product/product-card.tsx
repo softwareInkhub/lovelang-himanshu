@@ -3,8 +3,9 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { ShoppingCart, Star } from "lucide-react";
+import { ShoppingCart, Star, Heart } from "lucide-react";
 import { useCartStore } from "@/store/cart-store";
+import { useFavoritesStore } from "@/store/favorites-store";
 import { Product } from "@/types/product";
 
 interface ProductCardProps {
@@ -14,10 +15,17 @@ interface ProductCardProps {
 
 export default function ProductCard({ product, index = 0 }: ProductCardProps) {
   const addToCart = useCartStore(state => state.addToCart);
+  const { toggleFavorite, isFavorite } = useFavoritesStore();
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
     addToCart(product, 1);
+  };
+
+  const handleToggleFavorite = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleFavorite(product);
   };
 
   return (
@@ -39,6 +47,20 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
             <Badge className="absolute top-4 left-4" variant="secondary">
               {product.category}
             </Badge>
+            <Button
+              onClick={handleToggleFavorite}
+              variant="ghost"
+              size="sm"
+              className="absolute top-4 right-4 p-2 bg-white/90 hover:bg-white rounded-full shadow-md"
+            >
+              <Heart
+                className={`w-4 h-4 transition-colors ${
+                  isFavorite(product.id) 
+                    ? 'fill-red-500 text-red-500' 
+                    : 'text-stone-400 hover:text-red-500'
+                }`}
+              />
+            </Button>
           </div>
         </Link>
         

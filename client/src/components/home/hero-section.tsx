@@ -38,11 +38,18 @@ export default function HeroSection() {
             transition={{ delay: 0.6, duration: 0.8 }}
             className="flex flex-col sm:flex-row gap-4"
           >
-            <Button asChild className="bg-primary-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-primary-700 transition-colors text-lg">
-              <Link href="#best-sellers">Shop Hair Kits</Link>
+            <Button 
+              onClick={() => document.getElementById('best-sellers')?.scrollIntoView({ behavior: 'smooth' })}
+              className="bg-primary-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-primary-700 transition-colors text-lg"
+            >
+              Shop Hair Kits
             </Button>
-            <Button asChild variant="outline" className="border-2 border-primary-600 text-primary-600 px-8 py-4 rounded-full font-semibold hover:bg-primary-50 transition-colors text-lg">
-              <Link href="#key-ingredients">Learn More</Link>
+            <Button 
+              onClick={() => document.getElementById('key-ingredients')?.scrollIntoView({ behavior: 'smooth' })}
+              variant="outline" 
+              className="border-2 border-primary-600 text-primary-600 px-8 py-4 rounded-full font-semibold hover:bg-primary-50 transition-colors text-lg"
+            >
+              Learn More
             </Button>
           </motion.div>
         </motion.div>

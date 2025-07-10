@@ -27,7 +27,7 @@ const ingredients = [
 
 export default function KeyIngredients() {
   return (
-    <section className="py-20 bg-white">
+    <section id="key-ingredients" className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -35,10 +35,10 @@ export default function KeyIngredients() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
             Key <span className="text-primary-600 italic">Active</span> Ingredients
           </h2>
-          <p className="text-xl text-stone-600 max-w-4xl mx-auto">
+          <p className="text-lg lg:text-xl text-stone-600 max-w-4xl mx-auto">
             Our formulas are built around three powerhouse actives: Biotin to reduce hair fall, 
             Hyaluronic Acid to hydrate deeply, and Ceramides to repair damage and prevent breakage.
           </p>
@@ -60,8 +60,8 @@ export default function KeyIngredients() {
               >
                 <ingredient.icon className={`w-12 h-12 ${ingredient.iconColor}`} />
               </motion.div>
-              <h3 className="text-2xl font-bold mb-4">{ingredient.name}</h3>
-              <p className="text-stone-600">{ingredient.description}</p>
+              <h3 className="text-xl lg:text-2xl font-bold mb-4">{ingredient.name}</h3>
+              <p className="text-sm lg:text-base text-stone-600">{ingredient.description}</p>
             </motion.div>
           ))}
         </div>

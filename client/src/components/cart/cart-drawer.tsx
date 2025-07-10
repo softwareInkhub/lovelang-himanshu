@@ -24,7 +24,7 @@ export default function CartDrawer() {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed inset-y-0 right-0 w-96 bg-white shadow-2xl z-50 flex flex-col"
+            className="fixed inset-y-0 right-0 w-full max-w-md bg-white shadow-2xl z-50 flex flex-col"
           >
             <div className="p-6 border-b">
               <div className="flex items-center justify-between">
@@ -44,15 +44,15 @@ export default function CartDrawer() {
               ) : (
                 <div className="space-y-4">
                   {items.map((item) => (
-                    <div key={`${item.product.id}-${item.size || 'default'}`} className="flex items-center space-x-4 p-4 border rounded-lg">
+                    <div key={`${item.product.id}-${item.size || 'default'}`} className="flex items-center space-x-3 p-3 lg:p-4 border rounded-lg">
                       <img
                         src={item.product.images[0]}
                         alt={item.product.name}
-                        className="w-16 h-16 object-cover rounded-lg"
+                        className="w-12 h-12 lg:w-16 lg:h-16 object-cover rounded-lg"
                       />
                       <div className="flex-1">
-                        <h4 className="font-semibold">{item.product.name}</h4>
-                        <p className="text-stone-600 text-sm">{item.product.category}</p>
+                        <h4 className="font-semibold text-sm lg:text-base">{item.product.name}</h4>
+                        <p className="text-stone-600 text-xs lg:text-sm">{item.product.category}</p>
                         {item.size && (
                           <p className="text-stone-600 text-sm">Size: {item.size}</p>
                         )}

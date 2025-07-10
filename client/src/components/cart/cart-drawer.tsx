@@ -1,11 +1,11 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { X, Plus, Minus, ShoppingBag } from "lucide-react";
+import { X, Plus, Minus, ShoppingBag, Trash2 } from "lucide-react";
 import { useCartStore } from "@/store/cart-store";
 
 export default function CartDrawer() {
-  const { items, isOpen, toggleDrawer, removeFromCart, updateQuantity, total } = useCartStore();
+  const { items, isOpen, toggleDrawer, removeFromCart, updateQuantity, clearCart, total } = useCartStore();
 
   return (
     <AnimatePresence>
@@ -29,9 +29,22 @@ export default function CartDrawer() {
             <div className="p-6 border-b">
               <div className="flex items-center justify-between">
                 <h3 className="text-xl font-bold">Shopping Cart</h3>
-                <Button variant="ghost" size="sm" onClick={toggleDrawer}>
-                  <X className="w-5 h-5" />
-                </Button>
+                <div className="flex items-center space-x-2">
+                  {items.length > 0 && (
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      onClick={clearCart}
+                      className="text-red-500 hover:text-red-700 hover:bg-red-50"
+                      title="Clear all items"
+                    >
+                      Clear All
+                    </Button>
+                  )}
+                  <Button variant="ghost" size="sm" onClick={toggleDrawer}>
+                    <X className="w-5 h-5" />
+                  </Button>
+                </div>
               </div>
             </div>
             
@@ -73,6 +86,15 @@ export default function CartDrawer() {
                               onClick={() => updateQuantity(item.product.id, item.size || 'default', item.quantity + 1)}
                             >
                               <Plus className="w-3 h-3" />
+                            </Button>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => removeFromCart(item.product.id, item.size)}
+                              className="text-red-500 hover:text-red-700 hover:bg-red-50"
+                              title="Remove item"
+                            >
+                              <Trash2 className="w-3 h-3" />
                             </Button>
                           </div>
                         </div>

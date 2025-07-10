@@ -6,6 +6,8 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Star, Check, ShoppingCart, Heart } from "lucide-react";
 import { useCartStore } from "@/store/cart-store";
+import { useFavoritesStore } from "@/store/favorites-store";
+import { toast } from "@/hooks/use-toast";
 import products from "@/data/products.json";
 import { Product } from "@/types/product";
 
@@ -15,6 +17,7 @@ export default function ProductDetail() {
   const [quantity, setQuantity] = useState(1);
   const [selectedSize, setSelectedSize] = useState("");
   const addToCart = useCartStore(state => state.addToCart);
+  const { toggleFavorite, isFavorite } = useFavoritesStore();
 
   const product = products.find(p => p.slug === slug) as Product;
 
@@ -34,6 +37,24 @@ export default function ProductDetail() {
 
   const handleAddToCart = () => {
     addToCart(product, quantity, selectedSize || product.sizes[0]);
+    toast({
+      title: "Added to Cart!",
+      description: `${product.name} has been added to your cart`,
+      duration: 3000,
+    });
+  };
+
+  const handleToggleFavorite = () => {
+    const wasFavorite = isFavorite(product.id);
+    toggleFavorite(product);
+    
+    toast({
+      title: wasFavorite ? "Removed from Wishlist" : "Added to Wishlist!",
+      description: wasFavorite 
+        ? `${product.name} has been removed from your wishlist`
+        : `${product.name} has been added to your wishlist`,
+      duration: 2000,
+    });
   };
 
   return (
@@ -168,8 +189,19 @@ export default function ProductDetail() {
                     <ShoppingCart className="w-5 h-5 mr-2" />
                     Add to Cart
                   </Button>
-                  <Button variant="outline" size="lg">
-                    <Heart className="w-5 h-5" />
+                  <Button 
+                    variant="outline" 
+                    size="lg"
+                    onClick={handleToggleFavorite}
+                    className={`${isFavorite(product.id) ? 'bg-pink-50 border-pink-300' : ''}`}
+                  >
+                    <Heart 
+                      className={`w-5 h-5 transition-colors ${
+                        isFavorite(product.id) 
+                          ? 'fill-pink-500 text-pink-500' 
+                          : 'text-stone-400 hover:text-pink-500'
+                      }`} 
+                    />
                   </Button>
                 </div>
               </CardContent>

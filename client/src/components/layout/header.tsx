@@ -8,11 +8,13 @@ import { useCartStore } from "@/store/cart-store";
 import { useFavoritesStore } from "@/store/favorites-store";
 import { useAuth } from "@/hooks/useAuth";
 import SearchDialog from "@/components/ui/search-dialog";
+import WishlistDrawer from "@/components/wishlist/wishlist-drawer";
 import LoginButton from "@/components/auth/login-button";
 import UserProfile from "@/components/auth/user-profile";
 
 export default function Header() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isWishlistOpen, setIsWishlistOpen] = useState(false);
   const { items, toggleDrawer } = useCartStore();
   const { favorites } = useFavoritesStore();
   const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
@@ -122,10 +124,13 @@ export default function Header() {
               <Button
                 variant="ghost"
                 size="sm"
+                onClick={() => setIsWishlistOpen(true)}
                 className="relative p-2 hover:bg-pink-50 transition-colors md:flex hidden"
                 title="Wishlist"
               >
-                <Heart className="w-4 h-4 lg:w-5 lg:h-5 text-stone-600" />
+                <Heart className={`w-4 h-4 lg:w-5 lg:h-5 transition-colors ${
+                  favoritesCount > 0 ? 'text-pink-500 fill-pink-500' : 'text-stone-600'
+                }`} />
                 {favoritesCount > 0 && (
                   <Badge className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 flex items-center justify-center bg-pink-500 text-white text-xs">
                     {favoritesCount}
@@ -223,6 +228,7 @@ export default function Header() {
       </header>
       
       <SearchDialog isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
+      <WishlistDrawer isOpen={isWishlistOpen} onClose={() => setIsWishlistOpen(false)} />
     </>
   );
 }

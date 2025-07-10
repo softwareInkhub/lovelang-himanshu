@@ -34,9 +34,9 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.1 }}
       whileHover={{ y: -5 }}
-      className="group min-w-[300px] lg:min-w-0"
+      className="group w-full h-full"
     >
-      <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+      <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-full flex flex-col">
         <Link href={`/products/${product.slug}`}>
           <div className="relative">
             <img
@@ -64,9 +64,9 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
           </div>
         </Link>
         
-        <CardContent className="p-6">
+        <CardContent className="p-4 lg:p-6 flex flex-col h-full">
           <Link href={`/products/${product.slug}`}>
-            <h3 className="text-xl font-bold mb-2 hover:text-orange-600 transition-colors">
+            <h3 className="text-lg lg:text-xl font-bold mb-2 hover:text-orange-600 transition-colors line-clamp-2">
               {product.name}
             </h3>
           </Link>
@@ -85,15 +85,18 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
             <span className="text-stone-600 text-sm">({product.reviews})</span>
           </div>
           
-          <p className="text-stone-600 mb-4 line-clamp-2">{product.description}</p>
+          <p className="text-stone-600 mb-4 line-clamp-2 text-sm">{product.description}</p>
           
-          <div className="flex items-center justify-between">
-            <span className="text-2xl font-bold text-orange-600">₹{product.price}</span>
+          <div className="flex flex-col gap-3 mt-auto">
+            <div className="flex items-center justify-between">
+              <span className="text-xl lg:text-2xl font-bold text-orange-600">₹{product.price}</span>
+            </div>
             <Button
               onClick={handleAddToCart}
-              className="bg-stone-900 hover:bg-stone-800 text-white"
+              className="w-full bg-stone-900 hover:bg-stone-800 text-white flex items-center justify-center gap-2"
+              size="sm"
             >
-              <ShoppingCart className="w-4 h-4 mr-2" />
+              <ShoppingCart className="w-4 h-4" />
               Add to Cart
             </Button>
           </div>

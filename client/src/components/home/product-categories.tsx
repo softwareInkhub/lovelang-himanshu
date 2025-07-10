@@ -9,9 +9,9 @@ const categories = [
     for: "For Frizzy Hair",
     description: "Hyaluronic Complex hydrates deeply and smooths rough cuticles to reduce frizz.",
     image: LOVELANG_IMAGES.collections.mango,
-    bg: "from-primary-100 to-primary-50",
-    textColor: "text-primary-600",
-    buttonColor: "bg-white text-primary-600 hover:bg-primary-50"
+    bg: "from-orange-100 to-yellow-50",
+    textColor: "text-orange-600",
+    buttonColor: "bg-white text-orange-600 hover:bg-orange-50"
   },
   {
     name: "Peach",

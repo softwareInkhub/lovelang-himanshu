@@ -19,15 +19,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Admin routes
-  app.get('/api/admin/stats', isAuthenticated, async (req: any, res) => {
+  // Admin routes - accessible from standalone admin panel
+  app.get('/api/admin/stats', async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
-      const user = await storage.getUser(userId);
-      
-      // Check if user is admin
-      if (user?.role !== 'admin' && user?.role !== 'super_admin') {
-        return res.status(403).json({ message: "Admin access required" });
+      // For standalone admin, we'll use a simple API key check
+      const adminKey = req.headers['x-admin-key'];
+      if (adminKey !== 'lovelang-admin-2025') {
+        return res.status(403).json({ message: "Invalid admin key" });
       }
 
       // Mock admin stats for now
@@ -57,6 +55,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
       console.error("Error fetching admin stats:", error);
       res.status(500).json({ message: "Failed to fetch admin stats" });
     }
+  });
+
+  // Serve standalone admin panel
+  app.get('/admin-panel', (req, res) => {
+    res.sendFile(require('path').join(process.cwd(), 'admin', 'index.html'));
   });
 
   // Protected route example

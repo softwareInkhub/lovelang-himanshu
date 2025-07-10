@@ -1,15 +1,31 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
+import { setupAuth, isAuthenticated } from "./replitAuth";
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  // put application routes here
-  // prefix all routes with /api
+  // Auth middleware
+  await setupAuth(app);
 
-  // use storage to perform CRUD operations on the storage interface
-  // e.g. storage.insertUser(user) or storage.getUserByUsername(username)
+  // Auth routes
+  app.get('/api/auth/user', isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      const user = await storage.getUser(userId);
+      res.json(user);
+    } catch (error) {
+      console.error("Error fetching user:", error);
+      res.status(500).json({ message: "Failed to fetch user" });
+    }
+  });
+
+  // Protected route example
+  app.post("/api/checkout", isAuthenticated, async (req, res) => {
+    const userId = (req.user as any)?.claims?.sub;
+    // Process checkout for authenticated user
+    res.json({ success: true, message: "Checkout processed successfully" });
+  });
 
   const httpServer = createServer(app);
-
   return httpServer;
 }

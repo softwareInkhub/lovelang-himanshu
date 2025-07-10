@@ -3,9 +3,12 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { X, Plus, Minus, ShoppingBag, Trash2 } from "lucide-react";
 import { useCartStore } from "@/store/cart-store";
+import { useAuth } from "@/hooks/useAuth";
+import LoginButton from "@/components/auth/login-button";
 
 export default function CartDrawer() {
   const { items, isOpen, toggleDrawer, removeFromCart, updateQuantity, clearCart, total } = useCartStore();
+  const { isAuthenticated, isLoading } = useAuth();
 
   return (
     <AnimatePresence>
@@ -111,13 +114,23 @@ export default function CartDrawer() {
                   <span>Total:</span>
                   <span className="text-primary-600">₹{total}</span>
                 </div>
-                <Button
-                  asChild
-                  className="w-full bg-primary-600 hover:bg-primary-700"
-                  onClick={toggleDrawer}
-                >
-                  <Link href="/checkout">Proceed to Checkout</Link>
-                </Button>
+                
+                {isAuthenticated ? (
+                  <Button
+                    asChild
+                    className="w-full bg-primary-600 hover:bg-primary-700"
+                    onClick={toggleDrawer}
+                  >
+                    <Link href="/checkout">Proceed to Checkout</Link>
+                  </Button>
+                ) : (
+                  <div className="space-y-3">
+                    <p className="text-sm text-stone-600 text-center">
+                      Please log in to complete your purchase
+                    </p>
+                    <LoginButton className="w-full" />
+                  </div>
+                )}
               </div>
             )}
           </motion.div>

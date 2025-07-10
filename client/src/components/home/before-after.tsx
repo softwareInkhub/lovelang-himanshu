@@ -2,27 +2,28 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { LOVELANG_IMAGES } from "@/data/image-urls";
 
 const beforeAfterData = [
   {
     title: "Mango + Hyaluronic for Frizzy Hair",
     description: "Deep hydration that smooths rough cuticles to reduce frizz and boost shine.",
-    before: "https://images.unsplash.com/photo-1595475038665-8d66b0d87d32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300",
-    after: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300",
+    before: LOVELANG_IMAGES.products.mango.primary[0],
+    after: LOVELANG_IMAGES.products.mango.primary[1],
     color: "from-yellow-100 to-orange-50"
   },
   {
     title: "Peach + Biotin for Hair Fall",
     description: "Strengthens roots and reduces hair fall for thicker, healthier looking hair.",
-    before: "https://images.unsplash.com/photo-1559599238-82c8ac264b29?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300",
-    after: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300",
+    before: LOVELANG_IMAGES.products.peach.primary[0],
+    after: LOVELANG_IMAGES.products.peach.primary[1],
     color: "from-pink-100 to-rose-50"
   },
   {
     title: "Avocado + Ceramide for Damaged Hair", 
     description: "Repairs damage and restores strength for softer, healthier hair.",
-    before: "https://images.unsplash.com/photo-1559599238-82c8ac264b29?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300",
-    after: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300",
+    before: LOVELANG_IMAGES.products.avocado.primary[0],
+    after: LOVELANG_IMAGES.products.avocado.primary[1],
     color: "from-green-100 to-emerald-50"
   }
 ];

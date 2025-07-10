@@ -1,13 +1,14 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
+import { LOVELANG_IMAGES } from "@/data/image-urls";
 
 const categories = [
   {
     name: "Mango",
     for: "For Frizzy Hair",
     description: "Hyaluronic Complex hydrates deeply and smooths rough cuticles to reduce frizz.",
-    image: "https://images.unsplash.com/photo-1553279204-4c7e9ac3e5c8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300",
+    image: LOVELANG_IMAGES.collections.mango,
     bg: "from-primary-100 to-primary-50",
     textColor: "text-primary-600",
     buttonColor: "bg-white text-primary-600 hover:bg-primary-50"
@@ -16,7 +17,7 @@ const categories = [
     name: "Peach",
     for: "For Hair Fall",
     description: "Biotin and protein complexes strengthen roots and reduce hair fall effectively.",
-    image: "https://images.unsplash.com/photo-1629828674344-8b4fd8d6d4e5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300",
+    image: LOVELANG_IMAGES.products.peach.icon,
     bg: "from-red-100 to-pink-50",
     textColor: "text-red-600",
     buttonColor: "bg-white text-red-600 hover:bg-red-50"
@@ -25,7 +26,7 @@ const categories = [
     name: "Avocado",
     for: "For Damaged Hair",
     description: "Ceramides repair damage and restore strength for healthier, softer hair.",
-    image: "https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300",
+    image: LOVELANG_IMAGES.collections.avocado,
     bg: "from-green-100 to-emerald-50",
     textColor: "text-green-600",
     buttonColor: "bg-white text-green-600 hover:bg-green-50"

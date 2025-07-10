@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
+import { LOVELANG_IMAGES } from "@/data/image-urls";
 
 export default function HeroSection() {
   return (
@@ -61,8 +62,8 @@ export default function HeroSection() {
           className="relative"
         >
           <img
-            src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=800"
-            alt="Woman with beautiful healthy hair"
+            src={LOVELANG_IMAGES.banners.shopAllBanner}
+            alt="LoveLang Hair Care Products"
             className="rounded-3xl shadow-2xl w-full h-auto"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-orange-600/20 to-transparent rounded-3xl"></div>

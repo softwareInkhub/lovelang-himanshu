@@ -3,6 +3,7 @@ import HeroSection from "@/components/home/hero-section";
 import ProductCategories from "@/components/home/product-categories";
 import BestSellers from "@/components/home/best-sellers";
 import KeyIngredients from "@/components/home/key-ingredients";
+import BrandBadges from "@/components/home/brand-badges";
 import BeforeAfter from "@/components/home/before-after";
 import Testimonials from "@/components/home/testimonials";
 
@@ -18,6 +19,7 @@ export default function Home() {
       <ProductCategories />
       <BestSellers />
       <KeyIngredients />
+      <BrandBadges />
       <BeforeAfter />
       <Testimonials />
     </motion.div>

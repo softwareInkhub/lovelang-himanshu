@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import HeroSection from "@/components/home/hero-section";
+import DynamicBanner from "@/components/home/dynamic-banner";
 import ProductCategories from "@/components/home/product-categories";
 import ProductShowcase from "@/components/home/product-showcase";
 import ProductHighlights from "@/components/home/product-highlights";
@@ -17,7 +17,7 @@ export default function Home() {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <HeroSection />
+      <DynamicBanner />
       <ProductCategories />
       <ProductShowcase />
       <ProductHighlights />

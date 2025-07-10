@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Search, ShoppingBag, Menu } from "lucide-react";
@@ -10,6 +10,39 @@ export default function Header() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const { items, toggleDrawer } = useCartStore();
   const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
+  const [location, navigate] = useLocation();
+
+  const navigateToSection = (sectionId: string, category?: string) => {
+    if (location !== '/') {
+      // Navigate to home page first
+      navigate('/');
+      // Wait for navigation to complete, then scroll and filter
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+          if (category) {
+            setTimeout(() => {
+              const categoryBtn = document.querySelector(`[data-category="${category}"]`) as HTMLButtonElement;
+              categoryBtn?.click();
+            }, 500);
+          }
+        }
+      }, 100);
+    } else {
+      // Already on home page, just scroll and filter
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+        if (category) {
+          setTimeout(() => {
+            const categoryBtn = document.querySelector(`[data-category="${category}"]`) as HTMLButtonElement;
+            categoryBtn?.click();
+          }, 500);
+        }
+      }
+    }
+  };
 
   return (
     <>
@@ -22,44 +55,25 @@ export default function Header() {
             
             <nav className="hidden md:flex space-x-6 lg:space-x-8">
               <button 
-                onClick={() => document.getElementById('best-sellers')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => navigateToSection('best-sellers')}
                 className="text-sm lg:text-base text-stone-700 hover:text-orange-600 transition-colors cursor-pointer"
               >
                 Our Hair Kit
               </button>
               <button 
-                onClick={() => {
-                  document.getElementById('best-sellers')?.scrollIntoView({ behavior: 'smooth' });
-                  // Trigger category filter
-                  setTimeout(() => {
-                    const hairFallBtn = document.querySelector('[data-category="hair-fall"]') as HTMLButtonElement;
-                    hairFallBtn?.click();
-                  }, 500);
-                }}
+                onClick={() => navigateToSection('best-sellers', 'hair-fall')}
                 className="text-sm lg:text-base text-stone-700 hover:text-orange-600 transition-colors cursor-pointer"
               >
                 For Hair Fall
               </button>
               <button 
-                onClick={() => {
-                  document.getElementById('best-sellers')?.scrollIntoView({ behavior: 'smooth' });
-                  setTimeout(() => {
-                    const frizzBtn = document.querySelector('[data-category="frizz"]') as HTMLButtonElement;
-                    frizzBtn?.click();
-                  }, 500);
-                }}
+                onClick={() => navigateToSection('best-sellers', 'frizz')}
                 className="text-sm lg:text-base text-stone-700 hover:text-orange-600 transition-colors cursor-pointer"
               >
                 For Frizz
               </button>
               <button 
-                onClick={() => {
-                  document.getElementById('best-sellers')?.scrollIntoView({ behavior: 'smooth' });
-                  setTimeout(() => {
-                    const damageBtn = document.querySelector('[data-category="damage"]') as HTMLButtonElement;
-                    damageBtn?.click();
-                  }, 500);
-                }}
+                onClick={() => navigateToSection('best-sellers', 'damage')}
                 className="text-sm lg:text-base text-stone-700 hover:text-orange-600 transition-colors cursor-pointer"
               >
                 For Damage
@@ -100,7 +114,7 @@ export default function Header() {
                   <nav className="flex flex-col space-y-4 mt-8">
                     <button 
                       onClick={() => {
-                        document.getElementById('best-sellers')?.scrollIntoView({ behavior: 'smooth' });
+                        navigateToSection('best-sellers');
                         document.querySelector('[data-state="open"] button')?.click();
                       }}
                       className="text-stone-700 hover:text-orange-600 transition-colors text-left"
@@ -109,11 +123,7 @@ export default function Header() {
                     </button>
                     <button 
                       onClick={() => {
-                        document.getElementById('best-sellers')?.scrollIntoView({ behavior: 'smooth' });
-                        setTimeout(() => {
-                          const hairFallBtn = document.querySelector('[data-category="hair-fall"]') as HTMLButtonElement;
-                          hairFallBtn?.click();
-                        }, 500);
+                        navigateToSection('best-sellers', 'hair-fall');
                         document.querySelector('[data-state="open"] button')?.click();
                       }}
                       className="text-stone-700 hover:text-orange-600 transition-colors text-left"
@@ -122,11 +132,7 @@ export default function Header() {
                     </button>
                     <button 
                       onClick={() => {
-                        document.getElementById('best-sellers')?.scrollIntoView({ behavior: 'smooth' });
-                        setTimeout(() => {
-                          const frizzBtn = document.querySelector('[data-category="frizz"]') as HTMLButtonElement;
-                          frizzBtn?.click();
-                        }, 500);
+                        navigateToSection('best-sellers', 'frizz');
                         document.querySelector('[data-state="open"] button')?.click();
                       }}
                       className="text-stone-700 hover:text-orange-600 transition-colors text-left"
@@ -135,11 +141,7 @@ export default function Header() {
                     </button>
                     <button 
                       onClick={() => {
-                        document.getElementById('best-sellers')?.scrollIntoView({ behavior: 'smooth' });
-                        setTimeout(() => {
-                          const damageBtn = document.querySelector('[data-category="damage"]') as HTMLButtonElement;
-                          damageBtn?.click();
-                        }, 500);
+                        navigateToSection('best-sellers', 'damage');
                         document.querySelector('[data-state="open"] button')?.click();
                       }}
                       className="text-stone-700 hover:text-orange-600 transition-colors text-left"

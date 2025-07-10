@@ -113,11 +113,16 @@ The application follows a modern full-stack architecture with clear separation o
 
 ## Recent Changes: Latest modifications with dates
 
-### January 10, 2025 - Authentic LoveLang Image Integration
+### January 10, 2025 - Authentic LoveLang Image Integration & Dynamic Banner
 - **Image Management System**: Created centralized image URL management in `/client/src/data/image-urls.ts`
 - **Authentic Product Images**: Integrated 30+ high-quality LoveLang product images across all components
+- **Dynamic Banner Carousel**: NEW - Created moveable banner with 3 stunning LoveLang hero images
+  - "skinification of hair care" banner with auto-play/pause functionality
+  - "powered by fruit, backed by science" promotional banner
+  - "your hair's love language" brand messaging banner
+  - Smooth slide transitions with navigation controls and progress bar
 - **Product Categories**: Updated with real collection thumbnails (Mango, Peach, Avocado)
-- **Hero Section**: Now uses official LoveLang shop banner instead of placeholder
+- **Featured Collections**: Redesigned to horizontal layout for better user experience
 - **Brand Badges**: Added quality certification badges (FDCA, Vegan, Cruelty-Free, Vitamin Infused)
 - **Product Showcase**: New component featuring the 4:5 aspect ratio premium product images
 - **Product Highlights**: Additional section showcasing the specific high-quality images provided

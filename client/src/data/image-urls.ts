@@ -4,6 +4,14 @@ export const LOVELANG_IMAGES = {
   // Main banner and shop images
   banners: {
     shopAllBanner: "https://lovelang.in/cdn/shop/files/shop_all_banner_1.jpg?v=1747823477&width=1000",
+    // New Dynamic Banner Images
+    skinificationBanner: "https://lovelang.in/cdn/shop/files/LLW_Homepage_Banner_Mob_4.jpg?v=1748324122&width=1000",
+    fruitPoweredBanner: "https://lovelang.in/cdn/shop/files/LLW_Homepage_Banner_Mob_15.jpg?v=1748516921&width=1000", 
+    loveLanguageBanner: "https://lovelang.in/cdn/shop/files/LLW_Homepage_Banner_Mob_3.jpg?v=1748322770&width=1000",
+    avocadoCollectionBanner: "https://lovelang.in/cdn/shop/files/Avocado_Collection_2.jpg?v=1747818934&width=1000",
+    hotSpotBanner: "https://lovelang.in/cdn/shop/files/LLW_Hot_Spot_Mob_61a3f796-8269-48dd-bc3c-40cdf6afc84a.jpg?v=1747810531&width=1200",
+    testimonialBanner: "https://lovelang.in/cdn/shop/files/3.jpg?v=1746700113&width=1000",
+    landscapeAsset: "https://lovelang.in/cdn/shop/files/LLW_Landscape_Asset_03a321ba-0003-472b-919b-50b42b2e0b28.png?v=1746699398&width=800",
   },
 
   // Product Collection Images

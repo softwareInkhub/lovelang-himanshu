@@ -45,8 +45,9 @@ export default function FloatingActions() {
               >
                 <Button
                   onClick={handleWishlistClick}
-                  className="relative h-12 w-12 rounded-full bg-pink-500 hover:bg-pink-600 shadow-lg"
+                  className="relative h-12 w-12 rounded-full bg-pink-500 hover:bg-pink-600 shadow-lg border-2 border-white"
                   size="sm"
+                  style={{ backgroundColor: 'rgb(236 72 153)', opacity: 1 }}
                 >
                   <Heart className="w-5 h-5 text-white" />
                   {favoritesCount > 0 && (
@@ -65,8 +66,9 @@ export default function FloatingActions() {
               >
                 <Button
                   onClick={handleCartClick}
-                  className="relative h-12 w-12 rounded-full bg-primary-600 hover:bg-primary-700 shadow-lg"
+                  className="relative h-12 w-12 rounded-full bg-orange-600 hover:bg-orange-700 shadow-lg border-2 border-white"
                   size="sm"
+                  style={{ backgroundColor: 'rgb(234 88 12)', opacity: 1 }}
                 >
                   <ShoppingCart className="w-5 h-5 text-white" />
                   {cartItemCount > 0 && (
@@ -87,12 +89,13 @@ export default function FloatingActions() {
         >
           <Button
             onClick={() => setIsExpanded(!isExpanded)}
-            className={`h-14 w-14 rounded-full shadow-lg transition-all duration-200 ${
+            className={`h-14 w-14 rounded-full shadow-lg transition-all duration-200 border-2 border-white ${
               isExpanded 
                 ? "bg-gray-600 hover:bg-gray-700" 
-                : "bg-gradient-to-r from-primary-500 to-pink-500 hover:from-primary-600 hover:to-pink-600"
+                : "bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600"
             }`}
             size="sm"
+            style={{ opacity: 1 }}
           >
             <motion.div
               animate={{ rotate: isExpanded ? 45 : 0 }}

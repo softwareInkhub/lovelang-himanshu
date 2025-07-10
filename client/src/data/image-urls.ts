@@ -21,6 +21,7 @@ export const LOVELANG_IMAGES = {
         "https://lovelang.in/cdn/shop/files/MC1_388dd51f-bf3c-49a0-adf8-866cfaecd030.jpg?v=1747815833&width=1000",
         "https://lovelang.in/cdn/shop/files/MC2_e6c27907-cc33-452c-9e25-fb54887cfe43.jpg?v=1747815833&width=1000",
       ],
+      featured: "https://lovelang.in/cdn/shop/files/MC2_e6c27907-cc33-452c-9e25-fb54887cfe43.jpg?v=1747815833&width=1000",
       masks: [
         "https://lovelang.in/cdn/shop/files/MM1_4.jpg?v=1747808804&width=700",
         "https://lovelang.in/cdn/shop/files/MM2.jpg?v=1747808804&width=1000",
@@ -38,6 +39,7 @@ export const LOVELANG_IMAGES = {
         "https://lovelang.in/cdn/shop/files/PC1_4ceb978c-a312-41c3-af67-15d46818bf39.jpg?v=1747112435&width=1000",
         "https://lovelang.in/cdn/shop/files/PC2_105826fe-ee21-44c9-a2e9-6e4f9a55fed6.jpg?v=1747652218&width=1000",
       ],
+      featured: "https://lovelang.in/cdn/shop/files/PC2_105826fe-ee21-44c9-a2e9-6e4f9a55fed6.jpg?v=1747652218&width=1000",
       masks: [
         "https://lovelang.in/cdn/shop/files/PM1_4f402b5e-1110-40df-b24e-01e409be6553.jpg?v=1748252426&width=700",
         "https://lovelang.in/cdn/shop/files/PM1_9a1fa6a9-a651-479b-a6b1-830f723e1047.jpg?v=1747112479&width=700",
@@ -55,6 +57,7 @@ export const LOVELANG_IMAGES = {
         "https://lovelang.in/cdn/shop/files/AC1_f418ed94-58e6-4088-a27c-63cc01c4b799.jpg?v=1747112377&width=1000",
         "https://lovelang.in/cdn/shop/files/AC2_bbd43ee2-b7ff-46a5-936f-a323e575c765.jpg?v=1747652205&width=1000",
       ],
+      featured: "https://lovelang.in/cdn/shop/files/AC2_bbd43ee2-b7ff-46a5-936f-a323e575c765.jpg?v=1747652205&width=1000",
       masks: [
         "https://lovelang.in/cdn/shop/files/AM1_858f72e1-6aba-49ec-90a2-9dbd4164d6e9.jpg?v=1747112561&width=700",
         "https://lovelang.in/cdn/shop/files/AM2.jpg?v=1747112561&width=1000",

@@ -1,0 +1,143 @@
+[
+  {
+    "id": 1,
+    "name": "Mango + Hyaluronic Shampoo",
+    "slug": "mango-hyaluronic-shampoo",
+    "price": 545,
+    "category": "For Frizzy Hair",
+    "description": "Deeply hydrates and smooths rough cuticles to reduce frizz and boost shine with natural mango extracts and hyaluronic acid.",
+    "images": [
+      "https://images.unsplash.com/photo-1556228720-195a672e8a03?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=600",
+      "https://images.unsplash.com/photo-1556228720-195a672e8a03?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=600",
+      "https://images.unsplash.com/photo-1556228720-195a672e8a03?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=600"
+    ],
+    "benefits": [
+      "Reduces frizz by up to 85%",
+      "Deeply hydrates with Hyaluronic Acid",
+      "Natural mango extracts for shine",
+      "Suitable for daily use"
+    ],
+    "rating": 4.8,
+    "reviews": 234,
+    "ingredients": ["Mango Extract", "Hyaluronic Acid", "Coconut Oil", "Vitamin E"],
+    "sizes": ["250ml", "500ml"],
+    "inStock": true
+  },
+  {
+    "id": 2,
+    "name": "Peach + Biotin Shampoo",
+    "slug": "peach-biotin-shampoo",
+    "price": 545,
+    "category": "For Hair Fall",
+    "description": "Strengthens roots and reduces hair fall with biotin and protein complexes, enriched with peach extracts for nourishment.",
+    "images": [
+      "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=600",
+      "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=600",
+      "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=600"
+    ],
+    "benefits": [
+      "Reduces hair fall by 90%",
+      "Strengthens roots with Biotin",
+      "Adds natural volume and bounce",
+      "Protein complex for hair strength"
+    ],
+    "rating": 4.9,
+    "reviews": 187,
+    "ingredients": ["Peach Extract", "Biotin", "Protein Complex", "Argan Oil"],
+    "sizes": ["250ml", "500ml"],
+    "inStock": true
+  },
+  {
+    "id": 3,
+    "name": "Avocado + Ceramide Shampoo",
+    "slug": "avocado-ceramide-shampoo",
+    "price": 545,
+    "category": "For Damaged Hair",
+    "description": "Repairs damage and restores strength with ceramides and avocado butter, perfect for damaged and brittle hair.",
+    "images": [
+      "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=600",
+      "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=600",
+      "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=600"
+    ],
+    "benefits": [
+      "Repairs damaged hair cuticles",
+      "Strengthens with Ceramides",
+      "Nourishes with Avocado butter",
+      "Prevents future breakage"
+    ],
+    "rating": 4.7,
+    "reviews": 156,
+    "ingredients": ["Avocado Extract", "Ceramides", "Amino Acids", "Shea Butter"],
+    "sizes": ["250ml", "500ml"],
+    "inStock": true
+  },
+  {
+    "id": 4,
+    "name": "Mango + Hyaluronic Hair Mask",
+    "slug": "mango-hyaluronic-hair-mask",
+    "price": 695,
+    "category": "For Frizzy Hair",
+    "description": "Intensive weekly treatment mask that provides deep hydration and smooths frizz with concentrated mango and hyaluronic acid.",
+    "images": [
+      "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=600",
+      "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=600"
+    ],
+    "benefits": [
+      "Intensive hydration treatment",
+      "Reduces frizz for 3-4 days",
+      "Smooths and softens hair",
+      "Weekly treatment recommended"
+    ],
+    "rating": 4.9,
+    "reviews": 89,
+    "ingredients": ["Mango Extract", "Hyaluronic Acid", "Coconut Oil", "Vitamin E"],
+    "sizes": ["200ml"],
+    "inStock": true
+  },
+  {
+    "id": 5,
+    "name": "Peach + Biotin Hair Serum",
+    "slug": "peach-biotin-hair-serum",
+    "price": 795,
+    "category": "For Hair Fall",
+    "description": "Concentrated serum that targets hair fall at the roots with biotin and peach extracts for stronger, thicker hair.",
+    "images": [
+      "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=600",
+      "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=600"
+    ],
+    "benefits": [
+      "Targets hair fall at roots",
+      "Concentrated biotin formula",
+      "Promotes new hair growth",
+      "Non-greasy formula"
+    ],
+    "rating": 4.6,
+    "reviews": 124,
+    "ingredients": ["Peach Extract", "Biotin", "Protein Complex", "Argan Oil"],
+    "sizes": ["50ml"],
+    "inStock": true
+  },
+  {
+    "id": 6,
+    "name": "Avocado + Ceramide Hair Mask",
+    "slug": "avocado-ceramide-hair-mask",
+    "price": 695,
+    "category": "For Damaged Hair",
+    "description": "Intensive repair mask that deeply conditions and nourishes damaged hair with ceramides and avocado butter.",
+    "images": [
+      "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=600",
+      "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=600"
+    ],
+    "benefits": [
+      "Intensive repair treatment",
+      "Rebuilds damaged hair structure",
+      "Softens and smooths",
+      "Weekly treatment recommended"
+    ],
+    "rating": 4.8,
+    "reviews": 98,
+    "ingredients": ["Avocado Extract", "Ceramides", "Amino Acids", "Shea Butter"],
+    "sizes": ["200ml"],
+    "inStock": true
+  }
+]

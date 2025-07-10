@@ -66,7 +66,7 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
         
         <CardContent className="p-6">
           <Link href={`/products/${product.slug}`}>
-            <h3 className="text-xl font-bold mb-2 hover:text-primary-600 transition-colors">
+            <h3 className="text-xl font-bold mb-2 hover:text-orange-600 transition-colors">
               {product.name}
             </h3>
           </Link>
@@ -88,10 +88,10 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
           <p className="text-stone-600 mb-4 line-clamp-2">{product.description}</p>
           
           <div className="flex items-center justify-between">
-            <span className="text-2xl font-bold text-primary-600">₹{product.price}</span>
+            <span className="text-2xl font-bold text-orange-600">₹{product.price}</span>
             <Button
               onClick={handleAddToCart}
-              className="bg-primary-600 hover:bg-primary-700 text-white"
+              className="bg-stone-900 hover:bg-stone-800 text-white"
             >
               <ShoppingCart className="w-4 h-4 mr-2" />
               Add to Cart

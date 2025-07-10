@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 export default function HeroSection() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-primary-100 to-primary-50 min-h-screen flex items-center">
+    <section className="relative overflow-hidden bg-gradient-to-br from-yellow-200 to-orange-100 min-h-screen flex items-center">
       <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center">
         <motion.div
           initial={{ opacity: 0, x: -50 }}
@@ -20,7 +20,7 @@ export default function HeroSection() {
           >
             <span className="text-stone-900">skinification of</span>
             <br />
-            <span className="text-primary-600 italic">hair care</span>
+            <span className="text-orange-600 italic">hair care</span>
           </motion.h1>
           
           <motion.p
@@ -40,14 +40,14 @@ export default function HeroSection() {
           >
             <Button 
               onClick={() => document.getElementById('best-sellers')?.scrollIntoView({ behavior: 'smooth' })}
-              className="bg-primary-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-primary-700 transition-colors text-lg"
+              className="bg-stone-900 text-white px-8 py-4 rounded-full font-semibold hover:bg-stone-800 transition-colors text-lg"
             >
               Shop Hair Kits
             </Button>
             <Button 
               onClick={() => document.getElementById('key-ingredients')?.scrollIntoView({ behavior: 'smooth' })}
               variant="outline" 
-              className="border-2 border-primary-600 text-primary-600 px-8 py-4 rounded-full font-semibold hover:bg-primary-50 transition-colors text-lg"
+              className="border-2 border-stone-900 text-stone-900 px-8 py-4 rounded-full font-semibold hover:bg-stone-100 transition-colors text-lg"
             >
               Learn More
             </Button>
@@ -65,7 +65,7 @@ export default function HeroSection() {
             alt="Woman with beautiful healthy hair"
             className="rounded-3xl shadow-2xl w-full h-auto"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-primary-600/20 to-transparent rounded-3xl"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-orange-600/20 to-transparent rounded-3xl"></div>
         </motion.div>
       </div>
     </section>

@@ -13,7 +13,7 @@ export default function Testimonials() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            What Our Customers <span className="text-primary-600 italic">Say</span>
+            What Our Customers <span className="text-orange-600 italic">Say</span>
           </h2>
           <p className="text-xl text-stone-600">Real reviews from real customers who've transformed their hair.</p>
         </motion.div>

@@ -68,11 +68,11 @@ export default function ProductCategories() {
                 />
                 
                 <div className="relative z-10 h-full flex flex-col justify-end">
-                  <h3 className="text-3xl font-bold text-stone-900 mb-2">{category.name}</h3>
-                  <p className={`${category.textColor} font-semibold mb-4`}>{category.for}</p>
-                  <p className="text-stone-700 mb-6">{category.description}</p>
-                  <Button className={`${category.buttonColor} self-start transition-colors`}>
-                    Shop {category.name} Range
+                  <h3 className="text-2xl lg:text-3xl font-bold text-stone-900 mb-2">{category.name}</h3>
+                  <p className={`${category.textColor} font-semibold mb-4 text-sm lg:text-base`}>{category.for}</p>
+                  <p className="text-stone-700 mb-6 text-sm lg:text-base">{category.description}</p>
+                  <Button asChild className={`${category.buttonColor} self-start transition-colors text-sm lg:text-base px-4 py-2 lg:px-6 lg:py-3`}>
+                    <Link href={`#${category.name.toLowerCase()}-products`}>Shop {category.name} Range</Link>
                   </Button>
                 </div>
               </div>

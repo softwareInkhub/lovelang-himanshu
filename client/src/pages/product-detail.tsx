@@ -13,6 +13,7 @@ export default function ProductDetail() {
   const { slug } = useParams();
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
+  const [selectedSize, setSelectedSize] = useState("");
   const addToCart = useCartStore(state => state.addToCart);
 
   const product = products.find(p => p.slug === slug) as Product;
@@ -26,8 +27,13 @@ export default function ProductDetail() {
     );
   }
 
+  // Set default size
+  if (!selectedSize && product.sizes.length > 0) {
+    setSelectedSize(product.sizes[0]);
+  }
+
   const handleAddToCart = () => {
-    addToCart(product, quantity);
+    addToCart(product, quantity, selectedSize || product.sizes[0]);
   };
 
   return (
@@ -38,7 +44,7 @@ export default function ProductDetail() {
       className="container mx-auto px-4 py-12"
     >
       <div className="max-w-6xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-12">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Product Images */}
           <div className="space-y-4">
             <div className="aspect-square overflow-hidden rounded-3xl bg-white shadow-lg">
@@ -71,10 +77,10 @@ export default function ProductDetail() {
           {/* Product Info */}
           <div className="space-y-8">
             <div>
-              <Badge variant="secondary" className="mb-4">
+              <Badge variant="secondary" className="mb-4 text-xs lg:text-sm">
                 {product.category}
               </Badge>
-              <h1 className="text-4xl font-bold mb-4">{product.name}</h1>
+              <h1 className="text-2xl lg:text-4xl font-bold mb-4">{product.name}</h1>
               <div className="flex items-center gap-2 mb-4">
                 <div className="flex items-center">
                   {[...Array(5)].map((_, i) => (
@@ -88,11 +94,33 @@ export default function ProductDetail() {
                 </div>
                 <span className="text-stone-600">({product.reviews} reviews)</span>
               </div>
-              <p className="text-xl text-stone-700 leading-relaxed">{product.description}</p>
+              <p className="text-lg lg:text-xl text-stone-700 leading-relaxed">{product.description}</p>
             </div>
 
+            {/* Size Selection */}
+            {product.sizes.length > 0 && (
+              <div className="space-y-4">
+                <h3 className="text-lg font-bold">Size</h3>
+                <div className="flex gap-3">
+                  {product.sizes.map((size) => (
+                    <button
+                      key={size}
+                      onClick={() => setSelectedSize(size)}
+                      className={`px-4 py-2 border rounded-lg transition-colors ${
+                        selectedSize === size 
+                          ? 'border-primary-600 bg-primary-50 text-primary-600' 
+                          : 'border-stone-300 hover:border-stone-400'
+                      }`}
+                    >
+                      {size}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
             <div className="space-y-6">
-              <h3 className="text-2xl font-bold">Key Benefits</h3>
+              <h3 className="text-xl lg:text-2xl font-bold">Key Benefits</h3>
               <ul className="space-y-3">
                 {product.benefits.map((benefit, index) => (
                   <li key={index} className="flex items-start gap-3">

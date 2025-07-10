@@ -63,18 +63,18 @@ export default function Checkout() {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="container mx-auto px-4 py-12"
+      className="container mx-auto px-4 py-8 lg:py-12"
     >
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-4xl font-bold mb-8">Checkout</h1>
+        <h1 className="text-2xl lg:text-4xl font-bold mb-6 lg:mb-8">Checkout</h1>
         
         <form onSubmit={handleSubmit}>
-          <div className="grid lg:grid-cols-2 gap-12">
-            <div className="space-y-8">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
+            <div className="space-y-6 lg:space-y-8">
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Truck className="w-5 h-5" />
+                  <CardTitle className="flex items-center gap-2 text-lg lg:text-xl">
+                    <Truck className="w-4 h-4 lg:w-5 lg:h-5" />
                     Shipping Information
                   </CardTitle>
                 </CardHeader>
@@ -174,8 +174,8 @@ export default function Checkout() {
               
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <CreditCard className="w-5 h-5" />
+                  <CardTitle className="flex items-center gap-2 text-lg lg:text-xl">
+                    <CreditCard className="w-4 h-4 lg:w-5 lg:h-5" />
                     Payment Method
                   </CardTitle>
                 </CardHeader>

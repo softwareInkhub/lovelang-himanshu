@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 
 export default function HeroSection() {
@@ -37,11 +38,11 @@ export default function HeroSection() {
             transition={{ delay: 0.6, duration: 0.8 }}
             className="flex flex-col sm:flex-row gap-4"
           >
-            <Button className="bg-primary-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-primary-700 transition-colors text-lg">
-              Shop Hair Kits
+            <Button asChild className="bg-primary-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-primary-700 transition-colors text-lg">
+              <Link href="#best-sellers">Shop Hair Kits</Link>
             </Button>
-            <Button variant="outline" className="border-2 border-primary-600 text-primary-600 px-8 py-4 rounded-full font-semibold hover:bg-primary-50 transition-colors text-lg">
-              Learn More
+            <Button asChild variant="outline" className="border-2 border-primary-600 text-primary-600 px-8 py-4 rounded-full font-semibold hover:bg-primary-50 transition-colors text-lg">
+              <Link href="#key-ingredients">Learn More</Link>
             </Button>
           </motion.div>
         </motion.div>

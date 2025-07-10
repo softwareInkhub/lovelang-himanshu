@@ -19,7 +19,7 @@ const hairConcernData = {
     bgColor: "bg-gradient-to-br from-orange-300 to-yellow-200",
     textColor: "text-orange-800",
     badgeColor: "bg-orange-500",
-    category: "Frizzy Hair",
+    category: "For Frizzy Hair",
     ingredients: [
       { name: "avocado + ceramides", icon: "🥑" },
       { name: "peach + biotin", icon: "🍑" },
@@ -40,7 +40,7 @@ const hairConcernData = {
     bgColor: "bg-gradient-to-br from-pink-300 to-red-200",
     textColor: "text-pink-800",
     badgeColor: "bg-pink-500",
-    category: "Hair Fall",
+    category: "For Hair Fall",
     ingredients: [
       { name: "avocado + ceramides", icon: "🥑" },
       { name: "peach + biotin", icon: "🍑" },
@@ -61,7 +61,7 @@ const hairConcernData = {
     bgColor: "bg-gradient-to-br from-green-300 to-emerald-200",
     textColor: "text-green-800",
     badgeColor: "bg-green-500",
-    category: "Damaged Hair",
+    category: "For Damaged Hair",
     ingredients: [
       { name: "avocado + ceramides", icon: "🥑" },
       { name: "peach + biotin", icon: "🍑" },

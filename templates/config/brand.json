@@ -1,0 +1,30 @@
+{
+  "name": "YourBrand",
+  "tagline": "Your brand tagline here",
+  "logo": "/assets/brand/logo.png",
+  "primaryColor": "#ea580c",
+  "secondaryColor": "#f97316", 
+  "accentColor": "#fed7aa",
+  "fontFamily": "Inter, sans-serif",
+  "domain": "yourdomain.com",
+  "email": "info@yourdomain.com",
+  "phone": "+1-234-567-8900",
+  "address": {
+    "street": "123 Your Street",
+    "city": "Your City",
+    "state": "Your State",
+    "zip": "12345",
+    "country": "Your Country"
+  },
+  "social": {
+    "instagram": "https://instagram.com/yourbrand",
+    "facebook": "https://facebook.com/yourbrand",
+    "twitter": "https://twitter.com/yourbrand",
+    "youtube": "https://youtube.com/yourbrand"
+  },
+  "seo": {
+    "title": "YourBrand - Premium Products",
+    "description": "Discover premium products with YourBrand. High-quality, authentic products for your needs.",
+    "keywords": "premium, quality, products, yourbrand"
+  }
+}

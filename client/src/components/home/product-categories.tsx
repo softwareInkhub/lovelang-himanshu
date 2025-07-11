@@ -6,13 +6,13 @@ import { LOVELANG_IMAGES } from "@/data/image-urls";
 const categories = [
   {
     name: "Mango",
-    for: "For Damaged Hair",
-    description: "Rich in Vitamin A & C, deeply nourishes damaged hair and repairs split ends.",
+    for: "For Frizzy Hair",
+    description: "Hyaluronic Complex hydrates deeply and smooths rough cuticles to reduce frizz.",
     image: LOVELANG_IMAGES.products.mango.icon,
     bg: "from-orange-100 to-yellow-50",
     textColor: "text-orange-600",
     buttonColor: "bg-white text-orange-600 hover:bg-orange-50",
-    slug: "damage"
+    slug: "frizz"
   },
   {
     name: "Peach",
@@ -26,13 +26,13 @@ const categories = [
   },
   {
     name: "Avocado",
-    for: "For Frizzy Hair",
-    description: "Deep moisturizing formula controls frizz and adds natural bounce and volume.",
+    for: "For Damaged Hair",
+    description: "Ceramides repair damage and restore strength for healthier, softer hair.",
     image: LOVELANG_IMAGES.products.avocado.icon,
     bg: "from-green-100 to-emerald-50",
     textColor: "text-green-600",
     buttonColor: "bg-white text-green-600 hover:bg-green-50",
-    slug: "frizz"
+    slug: "damage"
   }
 ];
 

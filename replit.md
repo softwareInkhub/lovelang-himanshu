@@ -162,23 +162,27 @@ The application follows a modern full-stack architecture with clear separation o
   - Clean animations and professional design
   - Toast notifications for user feedback
 
-### January 11, 2025 - Complete Quantity-Based Pricing & Collection Product Matching
+### January 11, 2025 - Corrected Original LoveLang Fruit-to-Concern Mapping
+- **Original LoveLang Mapping Restored**: Fixed all pages to match the authentic LoveLang product mapping
+  - Avocado Collection → For Damaged Hair (green theme)
+  - Mango Collection → For Frizzy Hair (orange/yellow theme)  
+  - Peach Collection → For Hair Fall (pink theme)
+- **Comprehensive Site-Wide Updates**: Corrected mapping across all components
+  - Home page "Choose Your Love Language" section shows correct fruit-to-concern mapping
+  - Hair concern collection pages display correct products and descriptions
+  - Product filtering logic updated to match authentic LoveLang categorization
+  - Navigation links properly connect collections to their intended hair concerns
 - **Quantity-Based Pricing**: Implemented complete quantity multiplication system across all components
   - Product detail page shows total price with breakdown (e.g., "₹981 × 2")  
   - Cart store properly calculates totals with size-based pricing
   - Cart drawer and cart page display accurate quantity-based totals
   - Size selection (250ml vs 500ml) works seamlessly with quantity changes
-- **Collection Product Matching**: Updated hair concern pages to match products by fruit collection titles
-  - Avocado Collection shows Avocado + Ceramide products for frizz control
-  - Peach Collection shows Peach + Biotin products for hair fall control
-  - Mango Collection shows Mango + Hyaluronic products for damaged hair
-  - Collection names and descriptions now align with product ingredients
 
-### January 10, 2025 - Hair Concern Collection Pages (LoveLang.in Style)
+### January 10, 2025 - Hair Concern Collection Pages (LoveLang.in Style)  
 - **Hair Concern Pages**: Created dedicated collection pages exactly matching original LoveLang.in website
-  - Avocado Collection (`/hair-concerns/frizz`) with green theme for frizz control
+  - Mango Collection (`/hair-concerns/frizz`) with orange/yellow theme for frizzy hair
   - Peach Collection (`/hair-concerns/hair-fall`) with pink/red theme for hair fall control
-  - Mango Collection (`/hair-concerns/damage`) with orange/yellow theme for damaged hair
+  - Avocado Collection (`/hair-concerns/damage`) with green theme for damaged hair
 - **Page Features**: Each page includes hero section with branded imagery, ingredient circles, and filtered product grids
 - **Navigation Integration**: Updated header navigation to link directly to hair concern pages
 - **Themed Design**: Color-coordinated branding and styling matching original website aesthetics

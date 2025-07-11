@@ -2,6 +2,15 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { Product } from '@/types/product';
 
+// Helper function to get price based on size
+const getPriceForSize = (product: Product, size: string) => {
+  const basePrices: { [key: string]: number } = {
+    "250ml": product.price,
+    "500ml": Math.round(product.price * 1.8), // 500ml costs 80% more than 250ml
+  };
+  return basePrices[size] || product.price;
+};
+
 interface CartItem {
   product: Product;
   quantity: number;
@@ -36,7 +45,7 @@ export const useCartStore = create<CartState>()(
           get().updateQuantity(product.id, size, existingItem.quantity + quantity);
         } else {
           const newItems = [...items, { product, quantity, size }];
-          const newTotal = newItems.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
+          const newTotal = newItems.reduce((sum, item) => sum + getPriceForSize(item.product, item.size || 'default') * item.quantity, 0);
           set({ items: newItems, total: newTotal });
         }
       },
@@ -46,7 +55,7 @@ export const useCartStore = create<CartState>()(
         const newItems = items.filter(
           item => !(item.product.id === productId && (item.size || 'default') === size)
         );
-        const newTotal = newItems.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
+        const newTotal = newItems.reduce((sum, item) => sum + getPriceForSize(item.product, item.size || 'default') * item.quantity, 0);
         set({ items: newItems, total: newTotal });
       },
 
@@ -57,7 +66,7 @@ export const useCartStore = create<CartState>()(
             ? { ...item, quantity }
             : item
         );
-        const newTotal = newItems.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
+        const newTotal = newItems.reduce((sum, item) => sum + getPriceForSize(item.product, item.size || 'default') * item.quantity, 0);
         set({ items: newItems, total: newTotal });
       },
 

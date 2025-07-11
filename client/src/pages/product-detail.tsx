@@ -44,7 +44,8 @@ export default function ProductDetail() {
     return basePrices[size] || product.price;
   };
 
-  const currentPrice = selectedSize ? getPriceForSize(selectedSize) : product.price;
+  const basePrice = selectedSize ? getPriceForSize(selectedSize) : product.price;
+  const currentPrice = basePrice * quantity;
 
   const handleAddToCart = () => {
     addToCart(product, quantity, selectedSize || product.sizes[0]);
@@ -167,8 +168,15 @@ export default function ProductDetail() {
             <Card>
               <CardContent className="p-6">
                 <div className="flex items-center justify-between mb-6">
-                  <div className="text-3xl font-bold text-primary-600">
-                    ₹{currentPrice}
+                  <div className="flex flex-col">
+                    <div className="text-3xl font-bold text-primary-600">
+                      ₹{currentPrice}
+                    </div>
+                    {quantity > 1 && (
+                      <div className="text-sm text-stone-600">
+                        ₹{basePrice} × {quantity}
+                      </div>
+                    )}
                   </div>
                   <div className="flex items-center gap-4">
                     <span className="text-sm font-medium">Quantity:</span>

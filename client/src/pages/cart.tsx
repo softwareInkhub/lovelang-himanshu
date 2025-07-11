@@ -4,6 +4,16 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Trash2, Plus, Minus, ShoppingBag } from "lucide-react";
 import { useCartStore } from "@/store/cart-store";
+import { Product } from "@/types/product";
+
+// Helper function to get price based on size
+const getPriceForSize = (product: Product, size: string) => {
+  const basePrices: { [key: string]: number } = {
+    "250ml": product.price,
+    "500ml": Math.round(product.price * 1.8), // 500ml costs 80% more than 250ml
+  };
+  return basePrices[size] || product.price;
+};
 
 export default function Cart() {
   const { items, removeFromCart, updateQuantity, total } = useCartStore();
@@ -73,7 +83,7 @@ export default function Cart() {
                     </div>
                     
                     <div className="text-right">
-                      <p className="font-bold text-primary-600">₹{item.product.price * item.quantity}</p>
+                      <p className="font-bold text-primary-600">₹{getPriceForSize(item.product, item.size || 'default') * item.quantity}</p>
                       <Button
                         variant="ghost"
                         size="sm"

@@ -12,22 +12,22 @@ import { LOVELANG_IMAGES } from "@/data/image-urls";
 
 const hairConcernData = {
   "frizz": {
-    name: "Avocado Collection",
-    description: "Moisturizing avocado blend for frizz control and smoothness",
+    name: "Mango Collection",
+    description: "Nourishing mango-infused hair care for frizzy hair",
     heroImage: LOVELANG_IMAGES.banners.skinificationBanner,
-    color: "from-green-200 to-emerald-100", 
-    bgColor: "bg-gradient-to-br from-green-300 to-emerald-200",
-    textColor: "text-green-800",
-    badgeColor: "bg-green-500",
-    category: "Avocado Collection",
+    color: "from-orange-200 to-yellow-100",
+    bgColor: "bg-gradient-to-br from-orange-300 to-yellow-200",
+    textColor: "text-orange-800",
+    badgeColor: "bg-orange-500",
+    category: "Mango Collection",
     ingredients: [
-      { name: "avocado + ceramides", icon: "🥑" }
+      { name: "mango + hyaluronic", icon: "🥭" }
     ],
     benefits: [
-      "Controls frizz and flyaways",
-      "Deep moisturizing formula", 
-      "Adds natural bounce and volume",
-      "Protects from humidity"
+      "Reduces frizz by up to 85%",
+      "Deeply hydrates with Hyaluronic Acid",
+      "Natural mango extracts for shine",
+      "Suitable for daily use"
     ]
   },
   "hair-fall": {
@@ -50,22 +50,22 @@ const hairConcernData = {
     ]
   },
   "damage": {
-    name: "Mango Collection",
-    description: "Nourishing mango-infused hair care for damaged hair",
+    name: "Avocado Collection",
+    description: "Moisturizing avocado blend for damaged hair repair",
     heroImage: LOVELANG_IMAGES.banners.loveLanguageBanner,
-    color: "from-orange-200 to-yellow-100",
-    bgColor: "bg-gradient-to-br from-orange-300 to-yellow-200",
-    textColor: "text-orange-800",
-    badgeColor: "bg-orange-500",
-    category: "Mango Collection",
+    color: "from-green-200 to-emerald-100", 
+    bgColor: "bg-gradient-to-br from-green-300 to-emerald-200",
+    textColor: "text-green-800",
+    badgeColor: "bg-green-500",
+    category: "Avocado Collection",
     ingredients: [
-      { name: "mango + hyaluronic", icon: "🥭" }
+      { name: "avocado + ceramides", icon: "🥑" }
     ],
     benefits: [
-      "Rich in Vitamin A & C",
-      "Deeply nourishes damaged hair",
-      "Adds natural shine and softness",
-      "Repairs split ends and breakage"
+      "Repairs damaged hair cuticles",
+      "Strengthens with Ceramides",
+      "Nourishes with Avocado butter",
+      "Prevents future breakage"
     ]
   }
 };
@@ -86,15 +86,15 @@ export default function HairConcern() {
     );
   }
 
-  // Filter products based on collection mapping to match the fruit collection themes
+  // Filter products based on collection mapping to match the original LoveLang fruit collection themes
   const getCollectionProducts = (concern: string) => {
     switch (concern) {
-      case 'frizz': // Avocado Collection - for frizz control
-        return products.filter(product => product.name.toLowerCase().includes('avocado'));
+      case 'frizz': // Mango Collection - for frizz control
+        return products.filter(product => product.name.toLowerCase().includes('mango'));
       case 'hair-fall': // Peach Collection - for hair fall control  
         return products.filter(product => product.name.toLowerCase().includes('peach'));
-      case 'damage': // Mango Collection - for damaged hair
-        return products.filter(product => product.name.toLowerCase().includes('mango'));
+      case 'damage': // Avocado Collection - for damaged hair
+        return products.filter(product => product.name.toLowerCase().includes('avocado'));
       default:
         return products.filter(product => product.category === concernInfo.category);
     }

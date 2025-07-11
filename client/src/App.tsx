@@ -5,7 +5,6 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AnimatePresence } from "framer-motion";
 import Home from "@/pages/home";
-import Dashboard from "@/pages/dashboard";
 import ProductDetail from "@/pages/product-detail";
 import Collection from "@/pages/collection";
 import HairConcern from "@/pages/hair-concern";
@@ -26,7 +25,6 @@ function Router() {
         <AnimatePresence mode="wait">
           <Switch>
             <Route path="/" component={Home} />
-            <Route path="/dashboard" component={Dashboard} />
             <Route path="/products/:slug" component={ProductDetail} />
             <Route path="/collections/:collection" component={Collection} />
             <Route path="/hair-concerns/:concern" component={HairConcern} />

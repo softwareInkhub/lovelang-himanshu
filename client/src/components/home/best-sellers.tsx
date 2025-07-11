@@ -8,7 +8,7 @@ import products from "@/data/products.json";
 export default function BestSellers() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const itemsPerPage = 3;
+  const itemsPerPage = 2; // Reduced to ensure pagination works
   
   const filteredProducts = selectedCategory === "all" 
     ? products 
@@ -54,16 +54,22 @@ export default function BestSellers() {
               <Button 
                 variant="outline" 
                 size="sm" 
-                className="w-10 h-10 lg:w-12 lg:h-12 rounded-full"
+                className={`w-10 h-10 lg:w-12 lg:h-12 rounded-full transition-all ${
+                  totalPages <= 1 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-orange-50 hover:border-orange-300'
+                }`}
                 onClick={handlePrevious}
+                disabled={totalPages <= 1}
               >
                 <ChevronLeft className="w-4 h-4 lg:w-5 lg:h-5" />
               </Button>
               <Button 
                 variant="outline" 
                 size="sm" 
-                className="w-10 h-10 lg:w-12 lg:h-12 rounded-full"
+                className={`w-10 h-10 lg:w-12 lg:h-12 rounded-full transition-all ${
+                  totalPages <= 1 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-orange-50 hover:border-orange-300'
+                }`}
                 onClick={handleNext}
+                disabled={totalPages <= 1}
               >
                 <ChevronRight className="w-4 h-4 lg:w-5 lg:h-5" />
               </Button>
@@ -112,17 +118,26 @@ export default function BestSellers() {
         
         <ProductGrid products={currentProducts} />
         
-        <div className="flex justify-center mt-8 space-x-2">
-          {Array.from({ length: totalPages }).map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentIndex(index)}
-              className={`w-3 h-3 rounded-full transition-colors ${
-                index === currentIndex ? 'bg-primary-600' : 'bg-stone-300'
-              }`}
-            />
-          ))}
-        </div>
+        {totalPages > 1 && (
+          <div className="flex justify-center mt-8 space-x-2">
+            {Array.from({ length: totalPages }).map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentIndex(index)}
+                className={`w-3 h-3 rounded-full transition-all duration-200 hover:scale-125 ${
+                  index === currentIndex ? 'bg-orange-600' : 'bg-stone-300 hover:bg-stone-400'
+                }`}
+              />
+            ))}
+          </div>
+        )}
+        
+        {/* Show current page info when there are multiple pages */}
+        {totalPages > 1 && (
+          <div className="text-center mt-4 text-sm text-stone-600">
+            Page {currentIndex + 1} of {totalPages}
+          </div>
+        )}
       </div>
     </section>
   );

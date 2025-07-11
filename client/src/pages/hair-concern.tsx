@@ -12,18 +12,16 @@ import { LOVELANG_IMAGES } from "@/data/image-urls";
 
 const hairConcernData = {
   "frizz": {
-    name: "Anti-Frizz Range",
-    description: "Hyaluronic Complex hydrates deeply and smooths rough cuticles to reduce frizz",
+    name: "Avocado Collection",
+    description: "Moisturizing avocado blend for frizz control and smoothness",
     heroImage: LOVELANG_IMAGES.banners.skinificationBanner,
-    color: "from-orange-200 to-yellow-100",
-    bgColor: "bg-gradient-to-br from-orange-300 to-yellow-200",
-    textColor: "text-orange-800",
-    badgeColor: "bg-orange-500",
-    category: "For Frizzy Hair",
+    color: "from-green-200 to-emerald-100", 
+    bgColor: "bg-gradient-to-br from-green-300 to-emerald-200",
+    textColor: "text-green-800",
+    badgeColor: "bg-green-500",
+    category: "Avocado Collection",
     ingredients: [
-      { name: "avocado + ceramides", icon: "🥑" },
-      { name: "peach + biotin", icon: "🍑" },
-      { name: "mango + hyaluronic", icon: "🥭" }
+      { name: "avocado + ceramides", icon: "🥑" }
     ],
     benefits: [
       "Controls frizz and flyaways",
@@ -33,18 +31,16 @@ const hairConcernData = {
     ]
   },
   "hair-fall": {
-    name: "Volume Boost Range", 
-    description: "Biotin and protein complexes strengthen roots and reduce hair fall effectively",
+    name: "Peach Collection", 
+    description: "Gentle peach formula for hair fall control and strengthening",
     heroImage: LOVELANG_IMAGES.banners.fruitPoweredBanner,
     color: "from-pink-200 to-red-100",
     bgColor: "bg-gradient-to-br from-pink-300 to-red-200",
     textColor: "text-pink-800",
     badgeColor: "bg-pink-500",
-    category: "For Hair Fall",
+    category: "Peach Collection",
     ingredients: [
-      { name: "avocado + ceramides", icon: "🥑" },
-      { name: "peach + biotin", icon: "🍑" },
-      { name: "mango + hyaluronic", icon: "🥭" }
+      { name: "peach + biotin", icon: "🍑" }
     ],
     benefits: [
       "Reduces hair fall by 90%",
@@ -54,17 +50,15 @@ const hairConcernData = {
     ]
   },
   "damage": {
-    name: "Damage Repair Range",
-    description: "Ceramides repair damage and restore strength for healthier, softer hair",
+    name: "Mango Collection",
+    description: "Nourishing mango-infused hair care for damaged hair",
     heroImage: LOVELANG_IMAGES.banners.loveLanguageBanner,
-    color: "from-green-200 to-emerald-100", 
-    bgColor: "bg-gradient-to-br from-green-300 to-emerald-200",
-    textColor: "text-green-800",
-    badgeColor: "bg-green-500",
-    category: "For Damaged Hair",
+    color: "from-orange-200 to-yellow-100",
+    bgColor: "bg-gradient-to-br from-orange-300 to-yellow-200",
+    textColor: "text-orange-800",
+    badgeColor: "bg-orange-500",
+    category: "Mango Collection",
     ingredients: [
-      { name: "avocado + ceramides", icon: "🥑" },
-      { name: "peach + biotin", icon: "🍑" },
       { name: "mango + hyaluronic", icon: "🥭" }
     ],
     benefits: [
@@ -92,10 +86,21 @@ export default function HairConcern() {
     );
   }
 
-  // Filter products based on hair concern
-  const filteredProducts = products.filter(product => 
-    product.category === concernInfo.category
-  ) as Product[];
+  // Filter products based on collection mapping to match the fruit collection themes
+  const getCollectionProducts = (concern: string) => {
+    switch (concern) {
+      case 'frizz': // Avocado Collection - for frizz control
+        return products.filter(product => product.name.toLowerCase().includes('avocado'));
+      case 'hair-fall': // Peach Collection - for hair fall control  
+        return products.filter(product => product.name.toLowerCase().includes('peach'));
+      case 'damage': // Mango Collection - for damaged hair
+        return products.filter(product => product.name.toLowerCase().includes('mango'));
+      default:
+        return products.filter(product => product.category === concernInfo.category);
+    }
+  };
+
+  const filteredProducts = getCollectionProducts(concern!) as Product[];
 
   return (
     <motion.div

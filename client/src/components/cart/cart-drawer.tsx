@@ -5,6 +5,16 @@ import { X, Plus, Minus, ShoppingBag, Trash2 } from "lucide-react";
 import { useCartStore } from "@/store/cart-store";
 import { useAuth } from "@/hooks/useAuth";
 import LoginButton from "@/components/auth/login-button";
+import { Product } from "@/types/product";
+
+// Helper function to get price based on size
+const getPriceForSize = (product: Product, size: string) => {
+  const basePrices: { [key: string]: number } = {
+    "250ml": product.price,
+    "500ml": Math.round(product.price * 1.8), // 500ml costs 80% more than 250ml
+  };
+  return basePrices[size] || product.price;
+};
 
 export default function CartDrawer() {
   const { items, isOpen, toggleDrawer, removeFromCart, updateQuantity, clearCart, total } = useCartStore();
@@ -73,7 +83,7 @@ export default function CartDrawer() {
                           <p className="text-stone-600 text-sm">Size: {item.size}</p>
                         )}
                         <div className="flex items-center justify-between mt-2">
-                          <span className="font-bold text-primary-600">₹{item.product.price * item.quantity}</span>
+                          <span className="font-bold text-primary-600">₹{getPriceForSize(item.product, item.size || 'default') * item.quantity}</span>
                           <div className="flex items-center space-x-2">
                             <Button
                               variant="outline"

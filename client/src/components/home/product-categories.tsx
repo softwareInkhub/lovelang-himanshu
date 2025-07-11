@@ -6,13 +6,13 @@ import { LOVELANG_IMAGES } from "@/data/image-urls";
 const categories = [
   {
     name: "Mango",
-    for: "For Frizzy Hair",
-    description: "Hyaluronic Complex hydrates deeply and smooths rough cuticles to reduce frizz.",
+    for: "For Damaged Hair",
+    description: "Rich in Vitamin A & C, deeply nourishes damaged hair and repairs split ends.",
     image: LOVELANG_IMAGES.products.mango.icon,
     bg: "from-orange-100 to-yellow-50",
     textColor: "text-orange-600",
     buttonColor: "bg-white text-orange-600 hover:bg-orange-50",
-    slug: "mango"
+    slug: "damage"
   },
   {
     name: "Peach",
@@ -22,17 +22,17 @@ const categories = [
     bg: "from-red-100 to-pink-50",
     textColor: "text-red-600",
     buttonColor: "bg-white text-red-600 hover:bg-red-50",
-    slug: "peach"
+    slug: "hair-fall"
   },
   {
     name: "Avocado",
-    for: "For Damaged Hair",
-    description: "Ceramides repair damage and restore strength for healthier, softer hair.",
+    for: "For Frizzy Hair",
+    description: "Deep moisturizing formula controls frizz and adds natural bounce and volume.",
     image: LOVELANG_IMAGES.products.avocado.icon,
     bg: "from-green-100 to-emerald-50",
     textColor: "text-green-600",
     buttonColor: "bg-white text-green-600 hover:bg-green-50",
-    slug: "avocado"
+    slug: "frizz"
   }
 ];
 
@@ -56,7 +56,7 @@ export default function ProductCategories() {
         
         <div className="md:grid md:grid-cols-3 md:gap-8 flex md:flex-none overflow-x-auto gap-6 pb-4 md:pb-0 scrollbar-hide">
           {categories.map((category, index) => (
-            <Link key={category.name} href={`/collections/${category.slug}`}>
+            <Link key={category.name} href={`/hair-concerns/${category.slug}`}>
               <motion.div
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}

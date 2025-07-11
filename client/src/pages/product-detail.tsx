@@ -35,6 +35,17 @@ export default function ProductDetail() {
     setSelectedSize(product.sizes[0]);
   }
 
+  // Define pricing for different sizes
+  const getPriceForSize = (size: string) => {
+    const basePrices: { [key: string]: number } = {
+      "250ml": product.price,
+      "500ml": Math.round(product.price * 1.8), // 500ml costs 80% more than 250ml
+    };
+    return basePrices[size] || product.price;
+  };
+
+  const currentPrice = selectedSize ? getPriceForSize(selectedSize) : product.price;
+
   const handleAddToCart = () => {
     addToCart(product, quantity, selectedSize || product.sizes[0]);
     toast({
@@ -127,13 +138,14 @@ export default function ProductDetail() {
                     <button
                       key={size}
                       onClick={() => setSelectedSize(size)}
-                      className={`px-4 py-2 border rounded-lg transition-colors ${
+                      className={`px-4 py-3 border rounded-lg transition-colors flex flex-col items-center ${
                         selectedSize === size 
                           ? 'border-primary-600 bg-primary-50 text-primary-600' 
                           : 'border-stone-300 hover:border-stone-400'
                       }`}
                     >
-                      {size}
+                      <span className="font-medium">{size}</span>
+                      <span className="text-sm text-stone-600">₹{getPriceForSize(size)}</span>
                     </button>
                   ))}
                 </div>
@@ -156,7 +168,7 @@ export default function ProductDetail() {
               <CardContent className="p-6">
                 <div className="flex items-center justify-between mb-6">
                   <div className="text-3xl font-bold text-primary-600">
-                    ₹{product.price}
+                    ₹{currentPrice}
                   </div>
                   <div className="flex items-center gap-4">
                     <span className="text-sm font-medium">Quantity:</span>

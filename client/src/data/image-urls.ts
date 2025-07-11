@@ -92,6 +92,16 @@ export const LOVELANG_IMAGES = {
     "https://lovelang.in/cdn/shop/files/1000150620.jpg?v=1747821266&width=192",
     "https://lovelang.in/cdn/shop/files/1000150615.jpg?v=1747821481&width=192",
   ],
+
+  // Before/After comparison images
+  beforeAfter: {
+    frizzyBefore: "https://lovelang.in/cdn/shop/files/MC1_388dd51f-bf3c-49a0-adf8-866cfaecd030.jpg?v=1747815833&width=800",
+    frizzyAfter: "https://lovelang.in/cdn/shop/files/MC2_e6c27907-cc33-452c-9e25-fb54887cfe43.jpg?v=1747815833&width=800",
+    hairFallBefore: "https://lovelang.in/cdn/shop/files/PC1_4ceb978c-a312-41c3-af67-15d46818bf39.jpg?v=1747112435&width=800", 
+    hairFallAfter: "https://lovelang.in/cdn/shop/files/PC2_105826fe-ee21-44c9-a2e9-6e4f9a55fed6.jpg?v=1747652218&width=800",
+    damagedBefore: "https://lovelang.in/cdn/shop/files/AC1_f418ed94-58e6-4088-a27c-63cc01c4b799.jpg?v=1747112377&width=800",
+    damagedAfter: "https://lovelang.in/cdn/shop/files/AC2_bbd43ee2-b7ff-46a5-936f-a323e575c765.jpg?v=1747652205&width=800",
+  },
 };
 
 // Helper function to get optimized image URL with custom width

@@ -7,6 +7,7 @@ import BestSellers from "@/components/home/best-sellers";
 import KeyIngredients from "@/components/home/key-ingredients";
 import BrandBadges from "@/components/home/brand-badges";
 import BeforeAfter from "@/components/home/before-after";
+import InteractiveBeforeAfter from "@/components/home/interactive-before-after";
 import Testimonials from "@/components/home/testimonials";
 
 export default function Home() {
@@ -24,7 +25,7 @@ export default function Home() {
       <BestSellers />
       <KeyIngredients />
       <BrandBadges />
-      <BeforeAfter />
+      <InteractiveBeforeAfter />
       <Testimonials />
     </motion.div>
   );

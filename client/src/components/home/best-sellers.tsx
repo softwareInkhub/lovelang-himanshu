@@ -10,6 +10,9 @@ export default function BestSellers() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const itemsPerPage = 2; // Reduced to ensure pagination works
   
+  // Define all categories for cycling
+  const categories = ["all", "hair-fall", "frizz", "damage"];
+  
   const filteredProducts = selectedCategory === "all" 
     ? products 
     : products.filter(product => {
@@ -27,11 +30,45 @@ export default function BestSellers() {
   );
 
   const handlePrevious = () => {
-    setCurrentIndex((prev) => (prev > 0 ? prev - 1 : totalPages - 1));
+    if (currentIndex > 0) {
+      setCurrentIndex(prev => prev - 1);
+    } else {
+      // Go to previous category and its last page
+      const currentCategoryIndex = categories.indexOf(selectedCategory);
+      const prevCategory = currentCategoryIndex > 0 
+        ? categories[currentCategoryIndex - 1] 
+        : categories[categories.length - 1];
+      
+      setSelectedCategory(prevCategory);
+      
+      // Calculate pages for the new category
+      const prevCategoryProducts = prevCategory === "all" 
+        ? products 
+        : products.filter(product => {
+            if (prevCategory === "hair-fall") return product.category.toLowerCase().includes("hair fall");
+            if (prevCategory === "frizz") return product.category.toLowerCase().includes("frizzy");
+            if (prevCategory === "damage") return product.category.toLowerCase().includes("damaged");
+            return true;
+          });
+      
+      const prevCategoryPages = Math.ceil(prevCategoryProducts.length / itemsPerPage);
+      setCurrentIndex(Math.max(0, prevCategoryPages - 1));
+    }
   };
 
   const handleNext = () => {
-    setCurrentIndex((prev) => (prev < totalPages - 1 ? prev + 1 : 0));
+    if (currentIndex < totalPages - 1) {
+      setCurrentIndex(prev => prev + 1);
+    } else {
+      // Go to next category and first page
+      const currentCategoryIndex = categories.indexOf(selectedCategory);
+      const nextCategory = currentCategoryIndex < categories.length - 1 
+        ? categories[currentCategoryIndex + 1] 
+        : categories[0];
+      
+      setSelectedCategory(nextCategory);
+      setCurrentIndex(0);
+    }
   };
 
   const handleCategoryChange = (category: string) => {
@@ -132,12 +169,16 @@ export default function BestSellers() {
           </div>
         )}
         
-        {/* Show current page info when there are multiple pages */}
-        {totalPages > 1 && (
-          <div className="text-center mt-4 text-sm text-stone-600">
-            Page {currentIndex + 1} of {totalPages}
-          </div>
-        )}
+        {/* Show current page and category info */}
+        <div className="text-center mt-4 text-sm text-stone-600">
+          {totalPages > 1 ? (
+            <>Page {currentIndex + 1} of {totalPages} • </>
+          ) : null}
+          {selectedCategory === "all" && "All Products"}
+          {selectedCategory === "hair-fall" && "For Hair Fall"}
+          {selectedCategory === "frizz" && "For Frizz"}
+          {selectedCategory === "damage" && "For Damage"}
+        </div>
       </div>
     </section>
   );

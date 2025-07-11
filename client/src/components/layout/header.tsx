@@ -59,7 +59,7 @@ export default function Header() {
       <header className="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-stone-100">
         <div className="container mx-auto px-4 py-3 lg:py-4">
           <div className="flex items-center justify-between">
-            <Link href="/dashboard" className="text-xl lg:text-2xl font-bold text-stone-900 hover:text-orange-600 transition-colors">
+            <Link href="/" className="text-xl lg:text-2xl font-bold text-stone-900 hover:text-orange-600 transition-colors">
               lovelang.
             </Link>
             

@@ -33,8 +33,9 @@ export default function Builder() {
   useEffect(() => {
     if (Object.keys(config).length > 0) {
       const debounceTimer = setTimeout(() => {
+        console.log('Auto-generating code for config change:', config); // Debug log
         generateCode(config);
-      }, 1000); // Debounce for 1 second
+      }, 500); // Reduced debounce to 500ms for faster feedback
       
       return () => clearTimeout(debounceTimer);
     }
@@ -46,11 +47,21 @@ export default function Builder() {
       const response = await fetch(`/api/components/${sectionName}`);
       if (response.ok) {
         const data = await response.json();
+        console.log('Loaded config:', data.config); // Debug log
         setConfig(data.config);
-        setCode(data.code);
         
-        // Also generate fresh code based on config
-        await generateCode(data.config);
+        // Always generate fresh code after loading config
+        const generateResponse = await fetch(`/api/components/${sectionName}/generate`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ config: data.config })
+        });
+        
+        if (generateResponse.ok) {
+          const generatedData = await generateResponse.json();
+          console.log('Generated code on load:', generatedData.code); // Debug log
+          setCode(generatedData.code);
+        }
       } else {
         toast({
           title: "Error",
@@ -79,11 +90,20 @@ export default function Builder() {
       
       if (response.ok) {
         const data = await response.json();
+        console.log('Generated code:', data.code); // Debug log
         setCode(data.code);
+        
+        // Force switch to code tab to show the generated code
+        if (activeTab !== 'code') {
+          setActiveTab('code');
+        }
+        
         toast({
           title: "Code Generated",
           description: "Fresh code generated based on your configuration!"
         });
+      } else {
+        console.error('Code generation failed:', response.status);
       }
     } catch (error) {
       console.error('Error generating code:', error);
@@ -203,7 +223,15 @@ export default function Builder() {
                 </TabsTrigger>
               </TabsList>
             </Tabs>
-            <Button onClick={() => generateCode()} variant="outline" size="sm" disabled={isLoading}>
+            <Button 
+              onClick={() => {
+                console.log('Manual generate code clicked');
+                generateCode();
+              }} 
+              variant="outline" 
+              size="sm" 
+              disabled={isLoading}
+            >
               <Code className="w-4 h-4 mr-2" />
               Generate Code
             </Button>
@@ -290,11 +318,16 @@ export default function Builder() {
                       <ComponentPreview sectionType={selectedSection} config={config} />
                     </TabsContent>
                     <TabsContent value="code" className="h-full m-0 p-4">
-                      <CodeEditor
-                        value={code}
-                        onChange={(value) => setCode(value || '')}
-                        height="100%"
-                      />
+                      <div className="h-full">
+                        <div className="mb-2 text-sm text-gray-600">
+                          Generated React Component ({code ? code.length : 0} characters)
+                        </div>
+                        <CodeEditor
+                          value={code}
+                          onChange={(value) => setCode(value || '')}
+                          height="calc(100% - 30px)"
+                        />
+                      </div>
                     </TabsContent>
                   </div>
                 </div>

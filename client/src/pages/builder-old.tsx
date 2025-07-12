@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Save, Eye, Code, Settings, Layout, Share2 } from 'lucide-react';
+import { Save, Eye, Code, Settings, Template, Share2, Download } from 'lucide-react';
 import ComponentPreview from '@/components/builder/ComponentPreview';
 import CodeEditor from '@/components/builder/CodeEditor';
 import ConfigForm from '@/components/builder/ConfigForm';
@@ -89,8 +89,19 @@ export default function Builder() {
     setIsLoading(false);
   };
 
+  const exportConfig = () => {
+    const dataStr = JSON.stringify(config, null, 2);
+    const dataBlob = new Blob([dataStr], { type: 'application/json' });
+    const url = URL.createObjectURL(dataBlob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `${selectedSection.toLowerCase()}-config.json`;
+    link.click();
+  };
+
   const handleTemplateSelect = (template: any) => {
     setActiveMainTab('builder');
+    // Load template code and config
     loadSection(template.id.split('-')[0] + 'Section');
     toast({
       title: "Template Loaded",
@@ -141,7 +152,7 @@ export default function Builder() {
             <Tabs value={activeMainTab} onValueChange={setActiveMainTab}>
               <TabsList>
                 <TabsTrigger value="gallery">
-                  <Layout className="w-4 h-4 mr-2" />
+                  <Template className="w-4 h-4 mr-2" />
                   Templates
                 </TabsTrigger>
                 <TabsTrigger value="builder">

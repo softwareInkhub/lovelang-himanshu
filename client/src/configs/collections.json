@@ -12,7 +12,7 @@
     },
     {
       "id": "mango",
-      "name": "Mango Collection", 
+      "name": "Mango Collection",
       "image": "https://lovelang.in/cdn/shop/files/mango-collection.jpg",
       "description": "For Frizzy Hair - Smooth and tame with tropical mango extracts",
       "color": "#f59e0b"
@@ -20,7 +20,7 @@
     {
       "id": "peach",
       "name": "Peach Collection",
-      "image": "https://lovelang.in/cdn/shop/files/peach-collection.jpg", 
+      "image": "https://lovelang.in/cdn/shop/files/peach-collection.jpg",
       "description": "For Hair Fall - Strengthen and protect with gentle peach nutrients",
       "color": "#ec4899"
     }

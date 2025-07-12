@@ -91,13 +91,14 @@ const ExportManager: React.FC<ExportManagerProps> = ({ selectedSections, onExpor
   };
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Export & Share</CardTitle>
-        <p className="text-sm text-gray-600">
-          Export your sections as reusable templates
-        </p>
-      </CardHeader>
+    <div className="space-y-6 h-full overflow-auto">
+      <Card>
+        <CardHeader>
+          <CardTitle>Export & Share</CardTitle>
+          <p className="text-sm text-gray-600">
+            Export your sections as reusable templates
+          </p>
+        </CardHeader>
       <CardContent className="space-y-6">
         {/* Template Info */}
         <div className="space-y-4">
@@ -204,6 +205,7 @@ const ExportManager: React.FC<ExportManagerProps> = ({ selectedSections, onExpor
         </div>
       </CardContent>
     </Card>
+    </div>
   );
 };
 

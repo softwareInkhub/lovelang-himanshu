@@ -119,8 +119,8 @@ const TemplateGallery: React.FC<TemplateGalleryProps> = ({ onSelectTemplate }) =
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
+    <div className="space-y-6 h-full overflow-auto">
+      <div className="flex items-center justify-between sticky top-0 bg-white z-10 pb-2">
         <div>
           <h2 className="text-2xl font-bold">Template Gallery</h2>
           <p className="text-gray-600">Choose from our collection of reusable website sections</p>
@@ -142,7 +142,7 @@ const TemplateGallery: React.FC<TemplateGalleryProps> = ({ onSelectTemplate }) =
       </div>
 
       {/* Template Grid */}
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 pb-6">
         {filteredTemplates.map((template) => (
           <Card key={template.id} className="group hover:shadow-lg transition-shadow">
             <CardHeader className="pb-3">

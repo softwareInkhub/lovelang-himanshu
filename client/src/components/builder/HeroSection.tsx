@@ -15,33 +15,29 @@ interface HeroSectionProps {
 
 const HeroSection: React.FC<HeroSectionProps> = ({ config }) => (
   <section 
-    className="h-screen bg-cover bg-center text-white relative" 
+    className="h-screen bg-cover bg-center relative flex items-center justify-center"
     style={{ backgroundImage: `url(${config.backgroundImage})` }}
   >
     <div 
-      className="absolute inset-0 bg-black" 
+      className="absolute inset-0 bg-black"
       style={{ opacity: config.overlayOpacity / 100 }}
-    />
-    <div className="relative flex items-center justify-center h-full">
-      <div className="text-center space-y-6 max-w-4xl px-4">
-        <h1 
-          className="text-5xl md:text-7xl font-bold leading-tight"
-          style={{ color: config.textColor }}
-        >
-          {config.heading}
-        </h1>
-        <p 
-          className="text-lg md:text-xl max-w-2xl mx-auto"
-          style={{ color: config.textColor }}
-        >
-          {config.subtitle}
-        </p>
-        <button 
-          className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-3 rounded-lg text-lg font-semibold transition-colors"
-        >
-          {config.buttonText}
-        </button>
-      </div>
+    ></div>
+    <div className="relative z-10 text-center max-w-4xl px-4">
+      <h1 
+        className="text-5xl md:text-7xl font-bold mb-6"
+        style={{ color: config.textColor }}
+      >
+        {config.heading}
+      </h1>
+      <p 
+        className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto"
+        style={{ color: config.textColor }}
+      >
+        {config.subtitle}
+      </p>
+      <button className="bg-orange-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-orange-700 transition-colors">
+        {config.buttonText}
+      </button>
     </div>
   </section>
 );

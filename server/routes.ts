@@ -34,6 +34,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const name = req.params.name;
       const configPath = path.join(process.cwd(), `client/src/configs/${name.toLowerCase().replace('section', '')}.json`);
       const componentPath = path.join(process.cwd(), `client/src/components/builder/${name}.tsx`);
+      const cssPath = path.join(process.cwd(), `client/src/configs/${name.toLowerCase().replace('section', '')}.css`);
 
       // Read config file
       let config = {};
@@ -48,7 +49,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
         code = fs.readFileSync(componentPath, 'utf-8');
       }
 
-      res.json({ config, code });
+      // Read custom CSS
+      let customCSS = '';
+      if (fs.existsSync(cssPath)) {
+        customCSS = fs.readFileSync(cssPath, 'utf-8');
+      }
+
+      res.json({ config, code, customCSS });
     } catch (error) {
       console.error('Error reading component:', error);
       res.status(500).json({ error: 'Failed to read component' });
@@ -58,10 +65,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/components/:name", (req, res) => {
     try {
       const name = req.params.name;
-      const { code, config } = req.body;
+      const { code, config, customCSS } = req.body;
       
       const configPath = path.join(process.cwd(), `client/src/configs/${name.toLowerCase().replace('section', '')}.json`);
       const componentPath = path.join(process.cwd(), `client/src/components/builder/${name}.tsx`);
+      const cssPath = path.join(process.cwd(), `client/src/configs/${name.toLowerCase().replace('section', '')}.css`);
 
       // Ensure directories exist
       const configDir = path.dirname(configPath);
@@ -82,6 +90,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Write component code
       if (code) {
         fs.writeFileSync(componentPath, code);
+      }
+
+      // Write custom CSS
+      if (customCSS !== undefined) {
+        if (customCSS.trim()) {
+          fs.writeFileSync(cssPath, customCSS);
+        } else if (fs.existsSync(cssPath)) {
+          fs.unlinkSync(cssPath); // Remove empty CSS file
+        }
       }
 
       res.json({ success: true });

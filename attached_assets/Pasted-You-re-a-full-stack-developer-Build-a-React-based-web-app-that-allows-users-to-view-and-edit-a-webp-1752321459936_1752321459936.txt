@@ -1,0 +1,201 @@
+You're a full-stack developer. Build a React-based web app that allows users to view and edit a webpage section-by-section, where each section contains:
+
+A live preview of the section
+
+An editable view of the code (HTML/JSX, CSS, and optional JS)
+
+A side panel to update section configs (like text, images, background)
+
+API support to fetch/upload code for each section (Node.js or AWS Lambda backend)
+
+🔧 Requirements
+📁 Project Structure
+bash
+Copy
+Edit
+/components
+  /HeroSection.jsx
+  /CollectionsSection.jsx
+  /FooterSection.jsx
+/configs
+  hero.json
+  collections.json
+  footer.json
+/pages
+  /builder.jsx
+/server
+  /routes/componentRoutes.js
+  /controllers/codeController.js
+  /index.js
+🖼️ 1. Section Components
+Each component (e.g., HeroSection) should:
+
+Accept a config prop
+
+Be styled using Tailwind CSS
+
+Render a section of the page
+
+Be imported dynamically into the builder
+
+Example HeroSection.jsx:
+
+jsx
+Copy
+Edit
+const HeroSection = ({ config }) => (
+  <section className="h-screen bg-cover text-white" style={{ backgroundImage: `url(${config.backgroundImage})` }}>
+    <div className="flex items-center justify-center h-full bg-black bg-opacity-50">
+      <div className="text-center space-y-4">
+        <h1 className="text-5xl font-bold">{config.heading}</h1>
+        <p className="text-lg">{config.subtitle}</p>
+      </div>
+    </div>
+  </section>
+);
+
+export default HeroSection;
+📦 2. Code Viewer/Editor Panel
+Use @monaco-editor/react or react-codemirror to show the component code in a side panel. Load:
+
+JSX content
+
+Config JSON
+
+Allow editing + saving
+
+jsx
+Copy
+Edit
+<CodeEditor
+  language="jsx"
+  value={code}
+  onChange={(value) => setCode(value)}
+/>
+⚙️ 3. Section Config Editor
+Each section also has a JSON config like:
+
+json
+Copy
+Edit
+{
+  "backgroundImage": "/images/bg1.jpg",
+  "heading": "Skinification of Hair Care",
+  "subtitle": "Transform your hair with fruit-powered care"
+}
+Render it in a form so the user can change it and update live preview.
+
+🧠 4. Page Builder UI
+Create a builder page like /pages/builder.jsx:
+
+jsx
+Copy
+Edit
+const Builder = () => {
+  const [selectedSection, setSelectedSection] = useState('HeroSection');
+  const [config, setConfig] = useState({});
+  const [code, setCode] = useState('');
+
+  useEffect(() => {
+    fetch(`/api/components/${selectedSection}`).then(res => res.json()).then(data => {
+      setConfig(data.config);
+      setCode(data.code);
+    });
+  }, [selectedSection]);
+
+  const saveChanges = () => {
+    fetch(`/api/components/${selectedSection}`, {
+      method: 'POST',
+      body: JSON.stringify({ code, config }),
+      headers: { 'Content-Type': 'application/json' }
+    });
+  };
+
+  return (
+    <div className="grid grid-cols-2 h-screen">
+      <div className="overflow-auto p-4">
+        <ComponentPreview code={code} config={config} />
+      </div>
+      <div className="overflow-auto border-l p-4 space-y-4">
+        <h2 className="text-xl font-semibold">{selectedSection} Code</h2>
+        <CodeEditor value={code} onChange={setCode} />
+        <ConfigForm config={config} onChange={setConfig} />
+        <button onClick={saveChanges}>Save</button>
+      </div>
+    </div>
+  );
+};
+🌐 5. Backend API (Node.js + Express)
+/server/index.js:
+js
+Copy
+Edit
+const express = require('express');
+const app = express();
+const componentRoutes = require('./routes/componentRoutes');
+app.use(express.json());
+app.use('/api/components', componentRoutes);
+app.listen(3001, () => console.log('Server running on port 3001'));
+/routes/componentRoutes.js:
+js
+Copy
+Edit
+const express = require('express');
+const router = express.Router();
+const { getComponent, updateComponent } = require('../controllers/codeController');
+
+router.get('/:name', getComponent);
+router.post('/:name', updateComponent);
+
+module.exports = router;
+/controllers/codeController.js:
+js
+Copy
+Edit
+const fs = require('fs');
+const path = require('path');
+
+exports.getComponent = (req, res) => {
+  const name = req.params.name;
+  const jsxPath = path.join(__dirname, `../../components/${name}.jsx`);
+  const configPath = path.join(__dirname, `../../configs/${name.toLowerCase()}.json`);
+
+  const code = fs.readFileSync(jsxPath, 'utf-8');
+  const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
+
+  res.json({ code, config });
+};
+
+exports.updateComponent = (req, res) => {
+  const name = req.params.name;
+  const jsxPath = path.join(__dirname, `../../components/${name}.jsx`);
+  const configPath = path.join(__dirname, `../../configs/${name.toLowerCase()}.json`);
+
+  fs.writeFileSync(jsxPath, req.body.code);
+  fs.writeFileSync(configPath, JSON.stringify(req.body.config, null, 2));
+  res.json({ success: true });
+};
+🧩 Bonus: Live Preview via eval or Sandpack
+To render the edited component code:
+
+js
+Copy
+Edit
+import * as React from "react";
+import * as ReactDOM from "react-dom";
+
+const ComponentPreview = ({ code, config }) => {
+  const Comp = new Function("React", "config", `return ${code}`)(React, config);
+  return <Comp />;
+};
+⚠️ Only use this in local dev or sandboxed environments. For production, use something like Sandpack.
+
+✅ Features Recap
+Feature	Implementation
+Editable section components	React component per section
+HTML/JSX/CSS view + editing	Monaco or CodeMirror
+Fetch & upload section code	REST API + local file system or S3
+Configurable section data	JSON config + React props
+Live preview of code changes	eval / Sandpack + hot reload
+Responsive design	Tailwind CSS
+

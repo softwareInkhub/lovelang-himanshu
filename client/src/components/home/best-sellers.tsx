@@ -8,10 +8,16 @@ import products from "@/data/products.json";
 export default function BestSellers() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const itemsPerPage = 2; // Reduced to ensure pagination works
   
   // Define all categories for cycling
   const categories = ["all", "hair-fall", "frizz", "damage"];
+  
+  // Dynamic items per page: show more for "All Products", fewer for specific categories
+  const getItemsPerPage = () => {
+    return selectedCategory === "all" ? 4 : 2;
+  };
+  
+  const itemsPerPage = getItemsPerPage();
   
   const filteredProducts = selectedCategory === "all" 
     ? products 
@@ -41,7 +47,7 @@ export default function BestSellers() {
       
       setSelectedCategory(prevCategory);
       
-      // Calculate pages for the new category
+      // Calculate pages for the new category with dynamic items per page
       const prevCategoryProducts = prevCategory === "all" 
         ? products 
         : products.filter(product => {
@@ -51,7 +57,8 @@ export default function BestSellers() {
             return true;
           });
       
-      const prevCategoryPages = Math.ceil(prevCategoryProducts.length / itemsPerPage);
+      const prevCategoryItemsPerPage = prevCategory === "all" ? 4 : 2;
+      const prevCategoryPages = Math.ceil(prevCategoryProducts.length / prevCategoryItemsPerPage);
       setCurrentIndex(Math.max(0, prevCategoryPages - 1));
     }
   };
@@ -73,7 +80,7 @@ export default function BestSellers() {
 
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category);
-    setCurrentIndex(0);
+    setCurrentIndex(0); // Always reset to first page when changing categories
   };
 
   return (

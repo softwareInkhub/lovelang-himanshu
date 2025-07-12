@@ -149,13 +149,35 @@ export default function Builder() {
     setIsLoading(false);
   };
 
-  const handleTemplateSelect = (template: any) => {
-    setActiveMainTab('builder');
-    loadSection(template.id.split('-')[0] + 'Section');
-    toast({
-      title: "Template Loaded",
-      description: `${template.name} template has been loaded for editing`
-    });
+  const handleTemplateSelect = async (template: any) => {
+    try {
+      console.log('Loading template:', template);
+      
+      // Switch to builder mode first
+      setActiveMainTab('builder');
+      
+      // Determine the correct section name (hero-lovelang -> HeroSection)
+      const sectionType = template.id.split('-')[0];
+      const sectionName = sectionType.charAt(0).toUpperCase() + sectionType.slice(1) + 'Section';
+      
+      console.log('Setting section to:', sectionName);
+      setSelectedSection(sectionName);
+      
+      // Load the configuration and generate code for this section
+      await loadSection(sectionName);
+      
+      toast({
+        title: "Template Loaded",
+        description: `${template.name} template loaded successfully! Switch to Builder tab to edit.`
+      });
+    } catch (error) {
+      console.error('Error loading template:', error);
+      toast({
+        title: "Load Failed",
+        description: "Failed to load template",
+        variant: "destructive"
+      });
+    }
   };
 
   const handleExport = async (options: any) => {
@@ -198,9 +220,9 @@ export default function Builder() {
   };
 
   return (
-    <div className="h-screen flex flex-col bg-gray-50">
+    <div className="min-h-screen flex flex-col bg-gray-50 overflow-auto">
       {/* Header */}
-      <div className="bg-white border-b shadow-sm p-4">
+      <div className="bg-white border-b shadow-sm p-4 sticky top-0 z-10">
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold text-gray-900">Website Template Builder</h1>
@@ -243,18 +265,20 @@ export default function Builder() {
         </div>
       </div>
 
-      <div className="flex-1 overflow-hidden">
+      <div className="flex-1 overflow-auto">
         <Tabs value={activeMainTab} onValueChange={setActiveMainTab} className="h-full">
           {/* Template Gallery */}
-          <TabsContent value="gallery" className="h-full m-0 p-6">
-            <TemplateGallery onSelectTemplate={handleTemplateSelect} />
+          <TabsContent value="gallery" className="h-full m-0 p-6 overflow-auto">
+            <div className="max-h-full overflow-auto">
+              <TemplateGallery onSelectTemplate={handleTemplateSelect} />
+            </div>
           </TabsContent>
 
           {/* Builder Interface */}
-          <TabsContent value="builder" className="h-full m-0">
-            <div className="flex h-full">
+          <TabsContent value="builder" className="h-full m-0 overflow-auto">
+            <div className="flex h-full min-h-screen">
               {/* Sidebar */}
-              <div className="w-64 bg-white border-r shadow-sm">
+              <div className="w-64 bg-white border-r shadow-sm overflow-auto">
                 <div className="p-4">
                   <h2 className="text-lg font-semibold mb-4">Sections</h2>
                   <div className="space-y-2">
@@ -277,10 +301,10 @@ export default function Builder() {
               </div>
 
               {/* Main Content */}
-              <div className="flex-1 flex">
+              <div className="flex-1 flex overflow-auto">
                 {/* Preview/Editor Area */}
-                <div className="flex-1 flex flex-col">
-                  <div className="bg-white border-b p-4">
+                <div className="flex-1 flex flex-col overflow-auto">
+                  <div className="bg-white border-b p-4 sticky top-0 z-10">
                     <div className="flex items-center justify-between">
                       <Tabs value={activeTab} onValueChange={setActiveTab}>
                         <TabsList>
@@ -313,19 +337,21 @@ export default function Builder() {
                     </div>
                   </div>
 
-                  <div className="flex-1 overflow-hidden">
-                    <TabsContent value="preview" className="h-full m-0">
-                      <ComponentPreview sectionType={selectedSection} config={config} />
+                  <div className="flex-1 overflow-auto">
+                    <TabsContent value="preview" className="h-full m-0 overflow-auto">
+                      <div className="min-h-[500px] overflow-auto">
+                        <ComponentPreview sectionType={selectedSection} config={config} />
+                      </div>
                     </TabsContent>
-                    <TabsContent value="code" className="h-full m-0 p-4">
-                      <div className="h-full">
+                    <TabsContent value="code" className="h-full m-0 p-4 overflow-auto">
+                      <div className="h-full min-h-[500px]">
                         <div className="mb-2 text-sm text-gray-600">
                           Generated React Component ({code ? code.length : 0} characters)
                         </div>
                         <CodeEditor
                           value={code}
                           onChange={(value) => setCode(value || '')}
-                          height="calc(100% - 30px)"
+                          height="calc(100vh - 250px)"
                         />
                       </div>
                     </TabsContent>
@@ -359,8 +385,8 @@ export default function Builder() {
           </TabsContent>
 
           {/* Export & Share */}
-          <TabsContent value="export" className="h-full m-0 p-6">
-            <div className="max-w-2xl mx-auto">
+          <TabsContent value="export" className="h-full m-0 p-6 overflow-auto">
+            <div className="max-w-2xl mx-auto max-h-full overflow-auto">
               <ExportManager
                 selectedSections={[selectedSection]}
                 onExport={handleExport}

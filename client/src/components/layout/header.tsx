@@ -92,6 +92,14 @@ export default function Header() {
               >
                 For Damage
               </Button>
+              <Button
+                variant="ghost"
+                onClick={() => navigate('/builder')}
+                className="text-sm lg:text-base text-stone-700 hover:text-purple-600 hover:bg-purple-50 transition-all duration-200 font-medium px-3 lg:px-4"
+                title="Page Builder"
+              >
+                Builder
+              </Button>
             </nav>
             
             <div className="flex items-center space-x-1 lg:space-x-2">

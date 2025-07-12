@@ -11,6 +11,7 @@ import HairConcern from "@/pages/hair-concern";
 import Cart from "@/pages/cart";
 import Checkout from "@/pages/checkout";
 import ThankYou from "@/pages/thank-you";
+import Builder from "@/pages/builder";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import CartDrawer from "@/components/cart/cart-drawer";
@@ -19,26 +20,34 @@ import NotFound from "@/pages/not-found";
 
 function Router() {
   return (
-    <div className="min-h-screen bg-stone-50">
-      <Header />
-      <main>
-        <AnimatePresence mode="wait">
-          <Switch>
-            <Route path="/" component={Home} />
-            <Route path="/products/:slug" component={ProductDetail} />
-            <Route path="/collections/:collection" component={Collection} />
-            <Route path="/hair-concerns/:concern" component={HairConcern} />
-            <Route path="/cart" component={Cart} />
-            <Route path="/checkout" component={Checkout} />
-            <Route path="/thank-you" component={ThankYou} />
-            <Route component={NotFound} />
-          </Switch>
-        </AnimatePresence>
-      </main>
-      <Footer />
-      <CartDrawer />
-      <FloatingActions />
-    </div>
+    <Switch>
+      {/* Page Builder - Full Screen Layout */}
+      <Route path="/builder" component={Builder} />
+      
+      {/* Regular Website Layout */}
+      <Route>
+        <div className="min-h-screen bg-stone-50">
+          <Header />
+          <main>
+            <AnimatePresence mode="wait">
+              <Switch>
+                <Route path="/" component={Home} />
+                <Route path="/products/:slug" component={ProductDetail} />
+                <Route path="/collections/:collection" component={Collection} />
+                <Route path="/hair-concerns/:concern" component={HairConcern} />
+                <Route path="/cart" component={Cart} />
+                <Route path="/checkout" component={Checkout} />
+                <Route path="/thank-you" component={ThankYou} />
+                <Route component={NotFound} />
+              </Switch>
+            </AnimatePresence>
+          </main>
+          <Footer />
+          <CartDrawer />
+          <FloatingActions />
+        </div>
+      </Route>
+    </Switch>
   );
 }
 

@@ -29,6 +29,17 @@ export default function Builder() {
     loadSection(selectedSection);
   }, [selectedSection]);
 
+  // Auto-generate code when config changes
+  useEffect(() => {
+    if (Object.keys(config).length > 0) {
+      const debounceTimer = setTimeout(() => {
+        generateCode(config);
+      }, 1000); // Debounce for 1 second
+      
+      return () => clearTimeout(debounceTimer);
+    }
+  }, [config, selectedSection]);
+
   const loadSection = async (sectionName: string) => {
     setIsLoading(true);
     try {
@@ -37,6 +48,9 @@ export default function Builder() {
         const data = await response.json();
         setConfig(data.config);
         setCode(data.code);
+        
+        // Also generate fresh code based on config
+        await generateCode(data.config);
       } else {
         toast({
           title: "Error",
@@ -53,6 +67,32 @@ export default function Builder() {
       });
     }
     setIsLoading(false);
+  };
+
+  const generateCode = async (currentConfig = config) => {
+    try {
+      const response = await fetch(`/api/components/${selectedSection}/generate`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ config: currentConfig })
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        setCode(data.code);
+        toast({
+          title: "Code Generated",
+          description: "Fresh code generated based on your configuration!"
+        });
+      }
+    } catch (error) {
+      console.error('Error generating code:', error);
+      toast({
+        title: "Generation Failed",
+        description: "Failed to generate code",
+        variant: "destructive"
+      });
+    }
   };
 
   const saveChanges = async () => {
@@ -112,12 +152,21 @@ export default function Builder() {
       });
 
       if (response.ok) {
-        const blob = await response.blob();
-        const url = URL.createObjectURL(blob);
+        const templateData = await response.json();
+        
+        // Create downloadable file
+        const dataStr = JSON.stringify(templateData, null, 2);
+        const dataBlob = new Blob([dataStr], { type: 'application/json' });
+        const url = URL.createObjectURL(dataBlob);
         const link = document.createElement('a');
         link.href = url;
-        link.download = `${options.packageName || 'template'}.zip`;
+        link.download = `${options.packageName || 'template'}.json`;
         link.click();
+        
+        toast({
+          title: "Export Successful",
+          description: `Template exported as ${options.packageName || 'template'}.json`
+        });
       }
     } catch (error) {
       toast({
@@ -154,6 +203,10 @@ export default function Builder() {
                 </TabsTrigger>
               </TabsList>
             </Tabs>
+            <Button onClick={() => generateCode()} variant="outline" size="sm" disabled={isLoading}>
+              <Code className="w-4 h-4 mr-2" />
+              Generate Code
+            </Button>
             <Button onClick={saveChanges} disabled={isLoading} size="sm">
               <Save className="w-4 h-4 mr-2" />
               {isLoading ? 'Saving...' : 'Save'}
@@ -200,18 +253,36 @@ export default function Builder() {
                 {/* Preview/Editor Area */}
                 <div className="flex-1 flex flex-col">
                   <div className="bg-white border-b p-4">
-                    <Tabs value={activeTab} onValueChange={setActiveTab}>
-                      <TabsList>
-                        <TabsTrigger value="preview">
-                          <Eye className="w-4 h-4 mr-2" />
-                          Preview
-                        </TabsTrigger>
-                        <TabsTrigger value="code">
-                          <Code className="w-4 h-4 mr-2" />
-                          Code
-                        </TabsTrigger>
-                      </TabsList>
-                    </Tabs>
+                    <div className="flex items-center justify-between">
+                      <Tabs value={activeTab} onValueChange={setActiveTab}>
+                        <TabsList>
+                          <TabsTrigger value="preview">
+                            <Eye className="w-4 h-4 mr-2" />
+                            Preview
+                          </TabsTrigger>
+                          <TabsTrigger value="code">
+                            <Code className="w-4 h-4 mr-2" />
+                            Code
+                          </TabsTrigger>
+                        </TabsList>
+                      </Tabs>
+                      
+                      {activeTab === 'code' && (
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => {
+                            navigator.clipboard.writeText(code);
+                            toast({
+                              title: "Code Copied",
+                              description: "Component code copied to clipboard!"
+                            });
+                          }}
+                        >
+                          Copy Code
+                        </Button>
+                      )}
+                    </div>
                   </div>
 
                   <div className="flex-1 overflow-hidden">

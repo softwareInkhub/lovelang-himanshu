@@ -89,10 +89,20 @@ const TemplateGallery: React.FC<TemplateGalleryProps> = ({ onSelectTemplate }) =
 
   const copyCode = async (template: Template) => {
     try {
+      // First get the component data
       const response = await fetch(`/api/components/${template.id.split('-')[0]}Section`);
       const data = await response.json();
       
-      const fullCode = `// Component Code\n${data.code}\n\n// Configuration\n${JSON.stringify(data.config, null, 2)}`;
+      // Then generate fresh code
+      const generateResponse = await fetch(`/api/components/${template.id.split('-')[0]}Section/generate`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ config: data.config })
+      });
+      
+      const generatedData = await generateResponse.json();
+      
+      const fullCode = `// Component Code\n${generatedData.code}\n\n// Configuration\n${JSON.stringify(data.config, null, 2)}`;
       await navigator.clipboard.writeText(fullCode);
       
       toast({

@@ -1,28 +1,28 @@
 {
   "title": "Choose Your Love Language",
-  "subtitle": "Discover the perfect fruit-powered solution for your hair's unique needs",
-  "backgroundColor": "#fef7ed",
+  "subtitle": "Discover our fruit-powered collections designed for your specific hair needs",
+  "backgroundColor": "#f8f9fa",
   "collections": [
-    {
-      "id": "mango",
-      "name": "Mango Collection",
-      "image": "https://lovelang.in/cdn/shop/files/mango-collection-hero.jpg?v=1747823477&width=400",
-      "description": "For Frizzy Hair - Tame and smooth unruly hair",
-      "color": "#fbbf24"
-    },
-    {
-      "id": "peach",
-      "name": "Peach Collection", 
-      "image": "https://lovelang.in/cdn/shop/files/peach-collection-hero.jpg?v=1747823477&width=400",
-      "description": "For Hair Fall - Strengthen and nourish roots",
-      "color": "#fca5a5"
-    },
     {
       "id": "avocado",
       "name": "Avocado Collection",
-      "image": "https://lovelang.in/cdn/shop/files/avocado-collection-hero.jpg?v=1747823477&width=400", 
-      "description": "For Damaged Hair - Repair and restore vitality",
-      "color": "#86efac"
+      "image": "https://lovelang.in/cdn/shop/files/avocado-collection.jpg",
+      "description": "For Damaged Hair - Repair and restore with nutrient-rich avocado",
+      "color": "#10b981"
+    },
+    {
+      "id": "mango",
+      "name": "Mango Collection", 
+      "image": "https://lovelang.in/cdn/shop/files/mango-collection.jpg",
+      "description": "For Frizzy Hair - Smooth and tame with tropical mango extracts",
+      "color": "#f59e0b"
+    },
+    {
+      "id": "peach",
+      "name": "Peach Collection",
+      "image": "https://lovelang.in/cdn/shop/files/peach-collection.jpg", 
+      "description": "For Hair Fall - Strengthen and protect with gentle peach nutrients",
+      "color": "#ec4899"
     }
   ]
 }

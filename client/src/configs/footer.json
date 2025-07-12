@@ -1,6 +1,6 @@
 {
   "companyName": "LoveLang",
-  "description": "Fruit-powered, science-backed hair care solutions that understand your hair's love language",
+  "description": "Fruit-powered, science-backed hair care solutions that love your hair back",
   "backgroundColor": "#1f2937",
   "textColor": "#ffffff",
   "links": {
@@ -11,9 +11,9 @@
       { "text": "Press", "href": "/press" }
     ],
     "support": [
-      { "text": "Help Center", "href": "/help" },
       { "text": "Contact Us", "href": "/contact" },
-      { "text": "Shipping Info", "href": "/shipping" },
+      { "text": "FAQ", "href": "/faq" },
+      { "text": "Shipping", "href": "/shipping" },
       { "text": "Returns", "href": "/returns" }
     ],
     "legal": [
@@ -24,7 +24,7 @@
   },
   "socialMedia": {
     "facebook": "https://facebook.com/lovelang",
-    "instagram": "https://instagram.com/lovelang", 
+    "instagram": "https://instagram.com/lovelang",
     "twitter": "https://twitter.com/lovelang"
   },
   "copyright": "© 2025 LoveLang. All rights reserved."

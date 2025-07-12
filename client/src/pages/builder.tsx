@@ -2,13 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Save, Eye, Code, Settings, Palette, Download, Upload } from 'lucide-react';
+import { Save, Eye, Code, Settings } from 'lucide-react';
 import ComponentPreview from '@/components/builder/ComponentPreview';
-import DynamicComponentPreview from '@/components/builder/DynamicComponentPreview';
 import CodeEditor from '@/components/builder/CodeEditor';
-import CSSEditor from '@/components/builder/CSSEditor';
 import ConfigForm from '@/components/builder/ConfigForm';
-import TemplateLibrary from '@/components/builder/TemplateLibrary';
 import { useToast } from '@/hooks/use-toast';
 
 const sections = [
@@ -21,10 +18,8 @@ export default function Builder() {
   const [selectedSection, setSelectedSection] = useState('HeroSection');
   const [config, setConfig] = useState<any>({});
   const [code, setCode] = useState('');
-  const [customCSS, setCustomCSS] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [activeTab, setActiveTab] = useState('preview');
-  const [previewMode, setPreviewMode] = useState<'static' | 'dynamic'>('dynamic');
   const { toast } = useToast();
 
   useEffect(() => {
@@ -39,7 +34,6 @@ export default function Builder() {
         const data = await response.json();
         setConfig(data.config);
         setCode(data.code);
-        setCustomCSS(data.customCSS || '');
       } else {
         toast({
           title: "Error",
@@ -66,7 +60,7 @@ export default function Builder() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ code, config, customCSS }),
+        body: JSON.stringify({ code, config }),
       });
 
       if (response.ok) {
@@ -93,56 +87,13 @@ export default function Builder() {
   };
 
   const exportConfig = () => {
-    const exportData = {
-      section: selectedSection,
-      config,
-      code,
-      customCSS,
-      timestamp: new Date().toISOString()
-    };
-    const dataStr = JSON.stringify(exportData, null, 2);
+    const dataStr = JSON.stringify(config, null, 2);
     const dataBlob = new Blob([dataStr], { type: 'application/json' });
     const url = URL.createObjectURL(dataBlob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `${selectedSection.toLowerCase()}-complete.json`;
+    link.download = `${selectedSection.toLowerCase()}-config.json`;
     link.click();
-  };
-
-  const importConfig = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        try {
-          const importData = JSON.parse(e.target?.result as string);
-          setConfig(importData.config || {});
-          setCode(importData.code || '');
-          setCustomCSS(importData.customCSS || '');
-          toast({
-            title: "Success",
-            description: "Configuration imported successfully!"
-          });
-        } catch (error) {
-          toast({
-            title: "Error",
-            description: "Invalid configuration file",
-            variant: "destructive"
-          });
-        }
-      };
-      reader.readAsText(file);
-    }
-  };
-
-  const applyTemplate = (template: any) => {
-    setConfig(template.config);
-    setCode(template.code);
-    setCustomCSS(template.customCSS || '');
-    toast({
-      title: "Template Applied",
-      description: `${template.name} template has been loaded successfully!`
-    });
   };
 
   return (
@@ -155,36 +106,9 @@ export default function Builder() {
             <p className="text-gray-600">Build and customize your website sections</p>
           </div>
           <div className="flex items-center space-x-3">
-            <div className="flex items-center space-x-2">
-              <Button onClick={exportConfig} variant="outline" size="sm">
-                <Download className="w-4 h-4 mr-2" />
-                Export
-              </Button>
-              <label>
-                <Button variant="outline" size="sm" asChild>
-                  <span>
-                    <Upload className="w-4 h-4 mr-2" />
-                    Import
-                  </span>
-                </Button>
-                <input
-                  type="file"
-                  accept=".json"
-                  onChange={importConfig}
-                  className="hidden"
-                />
-              </label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Button
-                onClick={() => setPreviewMode(previewMode === 'static' ? 'dynamic' : 'static')}
-                variant="outline"
-                size="sm"
-                title={`Switch to ${previewMode === 'static' ? 'Dynamic' : 'Static'} Preview`}
-              >
-                {previewMode === 'static' ? 'Static' : 'Dynamic'} Preview
-              </Button>
-            </div>
+            <Button onClick={exportConfig} variant="outline" size="sm">
+              Export Config
+            </Button>
             <Button onClick={saveChanges} disabled={isLoading} size="sm">
               <Save className="w-4 h-4 mr-2" />
               {isLoading ? 'Saving...' : 'Save Changes'}
@@ -230,11 +154,7 @@ export default function Builder() {
                   </TabsTrigger>
                   <TabsTrigger value="code">
                     <Code className="w-4 h-4 mr-2" />
-                    JSX/TSX
-                  </TabsTrigger>
-                  <TabsTrigger value="css">
-                    <Palette className="w-4 h-4 mr-2" />
-                    CSS
+                    Code
                   </TabsTrigger>
                 </TabsList>
               </Tabs>
@@ -242,45 +162,14 @@ export default function Builder() {
 
             <div className="flex-1 overflow-hidden">
               <TabsContent value="preview" className="h-full m-0">
-                {previewMode === 'dynamic' ? (
-                  <DynamicComponentPreview 
-                    sectionType={selectedSection} 
-                    config={config} 
-                    code={code}
-                  />
-                ) : (
-                  <ComponentPreview sectionType={selectedSection} config={config} />
-                )}
+                <ComponentPreview sectionType={selectedSection} config={config} />
               </TabsContent>
               <TabsContent value="code" className="h-full m-0 p-4">
-                <div className="space-y-4 h-full">
-                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
-                    <p className="text-sm text-blue-800">
-                      <strong>Live Code Editor:</strong> Edit JSX/TSX code and see changes in real-time.
-                      Use React hooks, Tailwind classes, and Lucide icons.
-                    </p>
-                  </div>
-                  <CodeEditor
-                    value={code}
-                    onChange={(value) => setCode(value || '')}
-                    height="calc(100% - 80px)"
-                  />
-                </div>
-              </TabsContent>
-              <TabsContent value="css" className="h-full m-0 p-4">
-                <div className="space-y-4 h-full">
-                  <div className="bg-purple-50 border border-purple-200 rounded-lg p-3">
-                    <p className="text-sm text-purple-800">
-                      <strong>Custom CSS:</strong> Add custom styles that will be applied to your section.
-                      Use CSS selectors and properties.
-                    </p>
-                  </div>
-                  <CSSEditor
-                    value={customCSS}
-                    onChange={(value) => setCustomCSS(value || '')}
-                    height="calc(100% - 80px)"
-                  />
-                </div>
+                <CodeEditor
+                  value={code}
+                  onChange={(value) => setCode(value || '')}
+                  height="100%"
+                />
               </TabsContent>
             </div>
           </div>
@@ -293,29 +182,18 @@ export default function Builder() {
                 <h3 className="text-lg font-semibold">Configuration</h3>
               </div>
               
-              <div className="space-y-6">
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="text-base">{selectedSection} Configuration</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <ConfigForm
-                      config={config}
-                      onChange={setConfig}
-                      sectionType={selectedSection}
-                    />
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardContent className="pt-6">
-                    <TemplateLibrary
-                      sectionType={selectedSection}
-                      onApplyTemplate={applyTemplate}
-                    />
-                  </CardContent>
-                </Card>
-              </div>
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-base">{selectedSection}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ConfigForm
+                    config={config}
+                    onChange={setConfig}
+                    sectionType={selectedSection}
+                  />
+                </CardContent>
+              </Card>
             </div>
           </div>
         </div>

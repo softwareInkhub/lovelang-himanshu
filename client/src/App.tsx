@@ -17,6 +17,7 @@ import Footer from "@/components/layout/footer";
 import CartDrawer from "@/components/cart/cart-drawer";
 import FloatingActions from "@/components/ui/floating-actions";
 import NotFound from "@/pages/not-found";
+import VercelNotice from "@/components/VercelNotice";
 
 function Router() {
   return (
@@ -27,6 +28,7 @@ function Router() {
       {/* Regular Website Layout */}
       <Route>
         <div className="min-h-screen bg-stone-50">
+          <VercelNotice />
           <Header />
           <main>
             <AnimatePresence mode="wait">

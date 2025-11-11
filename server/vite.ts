@@ -4,7 +4,6 @@ import path from "path";
 import { createServer as createViteServer, createLogger } from "vite";
 import { type Server } from "http";
 import viteConfig from "../vite.config";
-import { nanoid } from "nanoid";
 
 const viteLogger = createLogger();
 
@@ -45,22 +44,28 @@ export async function setupVite(app: Express, server: Server) {
     const url = req.originalUrl;
 
     try {
-      const clientTemplate = path.resolve(
-        import.meta.dirname,
-        "..",
-        "client",
-        "index.html",
-      );
+      // Use process.cwd() for better Windows compatibility
+      const projectRoot = process.cwd();
+      const clientTemplate = path.join(projectRoot, "client", "index.html");
+      
+      console.log('[Vite] Loading template from:', clientTemplate);
+
+      // Check if file exists
+      if (!fs.existsSync(clientTemplate)) {
+        throw new Error(`Template not found at: ${clientTemplate}`);
+      }
 
       // always reload the index.html file from disk incase it changes
       let template = await fs.promises.readFile(clientTemplate, "utf-8");
+      // Add cache busting with timestamp instead of nanoid
       template = template.replace(
         `src="/src/main.tsx"`,
-        `src="/src/main.tsx?v=${nanoid()}"`,
+        `src="/src/main.tsx?v=${Date.now()}"`,
       );
       const page = await vite.transformIndexHtml(url, template);
       res.status(200).set({ "Content-Type": "text/html" }).end(page);
     } catch (e) {
+      console.error('[Vite] Error serving page:', e);
       vite.ssrFixStacktrace(e as Error);
       next(e);
     }

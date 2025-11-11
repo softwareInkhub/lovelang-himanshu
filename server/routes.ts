@@ -12,6 +12,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Auth routes
   app.get('/api/auth/user', isAuthenticated, async (req: any, res) => {
     try {
+      // In local dev mode without real auth, return null user
+      if (!req.user || !req.user.claims) {
+        return res.json(null);
+      }
+      
       const userId = req.user.claims.sub;
       const user = await storage.getUser(userId);
       res.json(user);

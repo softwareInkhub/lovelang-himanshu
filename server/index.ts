@@ -1,3 +1,4 @@
+import "dotenv/config";
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
@@ -60,11 +61,25 @@ app.use((req, res, next) => {
   // this serves both the API and the client.
   // It is the only port that is not firewalled.
   const port = 5000;
-  server.listen({
-    port,
-    host: "0.0.0.0",
-    reusePort: true,
-  }, () => {
+  
+  // Windows doesn't support reusePort option
+  const isWindows = process.platform === 'win32';
+  const listenOptions = isWindows 
+    ? { port, host: "127.0.0.1" }  // Use localhost on Windows
+    : { port, host: "0.0.0.0", reusePort: true };
+  
+  server.listen(listenOptions, () => {
     log(`serving on port ${port}`);
+    if (isWindows) {
+      log(`Windows detected - using 127.0.0.1 (localhost)`);
+    }
+    console.log('\n');
+    console.log('  🚀 Server is ready!');
+    console.log('\n');
+    console.log('  ➜  Local:   \x1b[36mhttp://localhost:5000\x1b[0m');
+    console.log('  ➜  Network: \x1b[36mhttp://127.0.0.1:5000\x1b[0m');
+    console.log('\n');
+    console.log('  Press Ctrl+C to stop');
+    console.log('\n');
   });
 })();

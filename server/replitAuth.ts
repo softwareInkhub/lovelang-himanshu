@@ -8,7 +8,9 @@ import memoize from "memoizee";
 import connectPg from "connect-pg-simple";
 import { storage } from "./storage";
 
-if (!process.env.REPLIT_DOMAINS) {
+// Allow running without Replit auth in local development
+const isLocalDev = process.env.NODE_ENV === 'development' && (!process.env.REPLIT_DOMAINS || process.env.REPL_ID === 'local-dev');
+if (!process.env.REPLIT_DOMAINS && !isLocalDev) {
   throw new Error("Environment variable REPLIT_DOMAINS not provided");
 }
 
@@ -24,13 +26,21 @@ const getOidcConfig = memoize(
 
 export function getSession() {
   const sessionTtl = 7 * 24 * 60 * 60 * 1000; // 1 week
-  const pgStore = connectPg(session);
-  const sessionStore = new pgStore({
-    conString: process.env.DATABASE_URL,
-    createTableIfMissing: false,
-    ttl: sessionTtl,
-    tableName: "sessions",
-  });
+  
+  // Use memory store in local dev without database
+  let sessionStore;
+  if (process.env.DATABASE_URL) {
+    const pgStore = connectPg(session);
+    sessionStore = new pgStore({
+      conString: process.env.DATABASE_URL,
+      createTableIfMissing: false,
+      ttl: sessionTtl,
+      tableName: "sessions",
+    });
+  } else {
+    console.warn('⚠️  Using memory session store (sessions will not persist across restarts)');
+  }
+  
   return session({
     secret: process.env.SESSION_SECRET!,
     store: sessionStore,
@@ -38,7 +48,7 @@ export function getSession() {
     saveUninitialized: false,
     cookie: {
       httpOnly: true,
-      secure: true,
+      secure: isLocalDev ? false : true, // Allow non-HTTPS in local dev
       maxAge: sessionTtl,
     },
   });
@@ -71,6 +81,13 @@ export async function setupAuth(app: Express) {
   app.use(getSession());
   app.use(passport.initialize());
   app.use(passport.session());
+
+  // Skip Replit auth setup in local development
+  if (isLocalDev) {
+    console.log('⚠️  Running in LOCAL DEVELOPMENT mode - Authentication disabled');
+    console.log('   User authentication will not work. Set proper REPLIT_DOMAINS for production.');
+    return;
+  }
 
   const config = await getOidcConfig();
 
@@ -128,6 +145,12 @@ export async function setupAuth(app: Express) {
 }
 
 export const isAuthenticated: RequestHandler = async (req, res, next) => {
+  // Skip auth check in local development
+  if (isLocalDev) {
+    console.log('⚠️  AUTH CHECK BYPASSED - Local development mode');
+    return next();
+  }
+
   const user = req.user as any;
 
   if (!req.isAuthenticated() || !user.expires_at) {
